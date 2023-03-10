@@ -45,6 +45,7 @@ const BetterEvidence = ({navigation}) => {
     // Use `setOptions` to update the button that we previously specified
     // Now the button includes an `onPress` handler to update the count
     navigation.setOptions({
+      name: 'Better Evidence',
       headerRight: () => (
         <TouchableOpacity style={styles.restartIcon} onPress={() => resetInvestigation()}>
           {/* <Animated.View style={{transform: [{rotate: spin}]}}> */}
@@ -311,7 +312,6 @@ const styles = StyleSheet.create({
 
   ghostNamePossible: {
     color: '#446D92',
-
     textShadowColor:'#C6CACE',
     textShadowRadius:20,
   },

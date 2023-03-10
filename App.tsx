@@ -4,7 +4,7 @@ import * as React from 'react';
 import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './src/components/HomeScreen';
+import NavigationTabs from './src/components/NavigationTabs';
 import Spinner from './src/assets/icons/spinner11.svg';
 
 // function HomeScreen1() {
@@ -32,14 +32,14 @@ function App() {
         }}>
         <Stack.Screen
           name="Better Evidence"
-          component={HomeScreen}
+          component={NavigationTabs}
           options={{
             headerRight: () => (
               <Spinner width={20} height={20} fill="#C6CACE" />
             ),
           }}
         />
-        {/* <Stack.Screen name="Details" component={HomeScreen} /> */}
+        {/* <Stack.Screen name="Timers" component={TimersScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
