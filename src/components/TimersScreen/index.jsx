@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Timer from '../Timer'
+import SmudgeTimer from '../SmudgeTimer'
 
 const TimersScreen = () => {
   return (
-    <View>
+    <View style={styles.background}>
       <Text>TimersScreen</Text>
       <View>
-        <Timer initialSeconds={120}/>
+        <SmudgeTimer />
       </View>
     </View>
   )
@@ -15,4 +15,10 @@ const TimersScreen = () => {
 
 export default TimersScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: '#2e2f31',
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+})
