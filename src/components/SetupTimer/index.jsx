@@ -1,12 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import * as Progress from 'react-native-progress';
 
-const SmudgeTimer = () => {
-  const [duration, setDuration] = useState(180)
+const durations = [
+  { label: '30 seconds', value: 30 },
+  { label: '1 minute', value: 60 },
+  { label: '2 minutes', value: 120 },
+  { label: '3 minutes', value: 180 },
+  { label: '4 minutes', value: 240 },
+  { label: '5 minutes', value: 300 },
+];
+
+const SetupTimer = () => {
+  const [duration, setDuration] = useState(300)
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progress, setProgress] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
+  const pickerRef = useRef();
 
   useEffect(() => {
     let countdownInterval;
@@ -40,27 +51,6 @@ const SmudgeTimer = () => {
     setTimerRunning(false);
   }
 
-  const getDemonColor = () => {
-    if (progress >= 0.33) {
-      return '#ff0e0e'
-    }
-    return '#C6CACE'
-  }
-
-  const getRestColor = () => {
-    if (progress >= 0.50) {
-      return '#ff0e0e'
-    }
-    return '#C6CACE'
-  }
-
-  const getSpiritColor = () => {
-    if (progress >= 1) {
-      return '#ff0e0e'
-    }
-    return '#C6CACE'
-  }
-
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -73,22 +63,41 @@ const SmudgeTimer = () => {
     if (progress > 0 && !timerRunning) return reset();
   }
 
+  const handleDurationChange = (value) => {
+    setDuration(value);
+    setTimeLeft(value);
+    setProgress(0);
+    pickerRef.current.blur();
+  };
+
+  function open() {
+    pickerRef.current.focus();
+  }
+
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleTimerPress()}>
       <View style={styles.header}>
-        <Text style={styles.name}>Smudge</Text>
+        <Text style={styles.name}>Setup</Text>
         <Text style={styles.timer}>{formatTime(timeLeft)}</Text>
       </View>
       <View style={styles.progressBarContainer}>
-        <View style={styles.labelContainer}>
-          <Text style={[styles.label, { color: getDemonColor(), left: '28%' }]}>Demon</Text>
-          <Text style={[styles.label, { color: getRestColor(), left: '45%' }]}>Others</Text>
-          <Text style={[styles.label, { color: getSpiritColor(), left: '92%' }]}>Spirit</Text>
-        </View>
         <View>
           <Progress.Bar unfilledColor={'#446D92'} color={'#0A0C0F'} borderColor={'#446D92'} borderWidth={1} progress={progress} width={null} height={30}/>
         </View>
       </View>
+      {!timerRunning && progress === 0 && <View>
+        <Button title="Select Duration" onPress={() => open(true)} />
+        <Picker
+            ref={pickerRef}
+            selectedValue={duration}
+            onValueChange={handleDurationChange}
+            style={styles.picker}
+          >
+            {durations.map((option) => (
+              <Picker.Item key={option.value} label={option.label} value={option.value} />
+            ))}
+        </Picker>
+      </View>}
     </TouchableOpacity>
   );
 };
@@ -97,7 +106,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#0A0C0F',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 10,
     borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -125,10 +134,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#90EE90',
     borderRadius: 5,
   },
+  durationSelectLabel: {
+    color: '#C6CACE',
+  },
   timer: {
     fontSize: 30,
     color: '#C6CACE',
     fontFamily: 'VT323-Regular'
+  },
+  picker: {
+    height: 0,
+    width: 0,
   },
   progressBarContainer: {
     marginBottom: 10,
@@ -167,4 +183,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SmudgeTimer;
+export default SetupTimer;

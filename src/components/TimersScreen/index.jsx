@@ -1,15 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import SmudgeTimer from '../SmudgeTimer'
+import HuntTimer from '../HuntTimer'
+import SetupTimer from '../SetupTimer'
 
 const TimersScreen = () => {
   return (
-    <View style={styles.background}>
-      <Text>TimersScreen</Text>
-      <View>
+    <ScrollView style={styles.background}>
+      <View style={styles.timerContainer}>
         <SmudgeTimer />
       </View>
-    </View>
+      <View style={styles.timerContainer}>
+        <HuntTimer />
+      </View>
+      <View style={styles.timerContainer}>
+        <SetupTimer />
+      </View>
+    </ScrollView>
   )
 }
 
@@ -20,5 +27,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#2e2f31',
     paddingTop: 20,
     paddingBottom: 20,
+  },
+  timerContainer: {
+    marginBottom: 20,
+  },
+  subheader: {
+    fontSize: 20,
+    color: '#738B9B',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    marginBottom: 20,
   },
 })
