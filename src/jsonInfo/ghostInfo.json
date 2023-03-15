@@ -240,7 +240,7 @@
   },
   {
     "name": "The Mimic",
-    "evidence": ["SPIRITBOX", "THERMOMETER", "FINGERPRINTS"],
+    "evidence": ["GHOSTORB", "SPIRITBOX", "THERMOMETER", "FINGERPRINTS"],
     "strengths": [
       "Mimics other ghost types one after another for brief periods of time"
     ],

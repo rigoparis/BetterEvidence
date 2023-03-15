@@ -5,12 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Animated,
 } from 'react-native';
 import EvidenceContainer from '../EvidenceContainer';
 import evidenceInfo from '../../jsonInfo/evidenceInfo.json';
 import ghostInfo from '../../jsonInfo/ghostInfo.json';
-import {includes, without, difference, intersection} from 'lodash';
+import {includes, without, difference, intersection, filter, every, some, find} from 'lodash';
 import GhostInfoContainer from '../GhostInfoContainer';
 import {
   NotifierWrapper,
@@ -20,42 +19,27 @@ import {
 } from 'react-native-notifier';
 import Spinner from '../../assets/icons/spinner11.svg';
 
-const BetterEvidence = ({navigation}) => {
+const BetterEvidence = () => {
   const [selectedEvidence, setSelectedEvidence] = useState([]);
   const [rejectedEvidence, setRejectedEvidence] = useState([]);
-  // const spinValue = new Animated.Value(0);
-
-  // // First set up animation
-  // Animated.loop(
-  //   Animated.timing(spinValue, {
-  //     toValue: 1,
-  //     duration: 1000,
-  //     easing: Easing.linear, // Easing is an additional import from react-native
-  //     useNativeDriver: true, // To make use of native driver for performance
-  //   })
-  // ).start();
-
-  // // Next, interpolate beginning and end values (in this case 0 and 1)
-  // const spin = spinValue.interpolate({
-  //   inputRange: [0, 1],
-  //   outputRange: ['0deg', '360deg'],
-  // });
+  const [possibleGhosts, setPossibleGhosts] = useState([]);
 
   useEffect(() => {
-    // Use `setOptions` to update the button that we previously specified
-    // Now the button includes an `onPress` handler to update the count
-    navigation.setOptions({
-      name: 'Better Evidence',
-      headerRight: () => (
-        <TouchableOpacity style={styles.restartIcon} onPress={() => resetInvestigation()}>
-          {/* <Animated.View style={{transform: [{rotate: spin}]}}> */}
-            <Spinner width={20} height={20} fill="#C6CACE" />
-          {/* </Animated.View> */}
-        </TouchableOpacity>
-      ),
+    let result = filter(ghostInfo, obj => {
+      let evidence = obj.evidence;
+      return every(selectedEvidence, str => includes(evidence, str)) && !some(rejectedEvidence, str => includes(evidence, str));
     });
-  }, [navigation]);
+    let selectedLength = selectedEvidence.length;
+    let matchingOrMore = filter(result, obj => obj.evidence.length >= selectedLength);
+    return setPossibleGhosts(matchingOrMore);
+  }, [selectedEvidence, rejectedEvidence])
 
+  useEffect(() => {
+    if (possibleGhosts.length === 1) {
+      showNotification();
+    }
+  }, [possibleGhosts])
+  
   const resetInvestigation = () => {
     setSelectedEvidence([]);
     setRejectedEvidence([]);
@@ -91,7 +75,8 @@ const BetterEvidence = ({navigation}) => {
     if (
       pEviName === 'GHOSTORB' &&
       !includes(selectedEvidence, 'GHOSTORB') &&
-      !includes(rejectedEvidence, 'GHOSTORB')
+      !includes(rejectedEvidence, 'GHOSTORB') &&
+      find(possibleGhosts, {name: 'The Mimic'})
     ) {
       Notifier.showNotification({
         title: 'POTENTIAL MIMIC',
@@ -108,57 +93,15 @@ const BetterEvidence = ({navigation}) => {
     }
   };
 
-  const getGhostInfoVisible = (ghost) => {
-    if (
-      rejectedEvidence.length > 0 &&
-      intersection(rejectedEvidence, ghost.evidence).length > 0
-    ) {
-      return false;
-    } else if (
-      selectedEvidence.length <= 3 &&
-      difference(selectedEvidence, ghost.evidence).length > 0
-    ) {
-      return false;
-    } else if (
-      selectedEvidence.length < 3 &&
-      intersection(selectedEvidence, ghost.evidence).length > 0
-    ) {
-      return true;
-    } else if (
-      selectedEvidence.length === 3 &&
-      intersection(selectedEvidence, ghost.evidence).length === 3
-    ) {
-      return true;
-    } else {
-      return true;
-    }
-  };
-
   const getGhostNameStyles = (ghost) => {
-    if (
-      rejectedEvidence.length > 0 &&
-      intersection(rejectedEvidence, ghost.evidence).length > 0
-    ) {
+    if (possibleGhosts.length > 0) {
+      if (possibleGhosts.length === 1 && find(possibleGhosts, ghost)) return [styles.ghostName, styles.ghostNamePossible];
+      if (find(possibleGhosts, ghost)) {
+        return [styles.ghostName];
+      }
       return [styles.ghostName, styles.ghostNameRejected];
-    } else if (
-      selectedEvidence.length <= 3 &&
-      difference(selectedEvidence, ghost.evidence).length > 0
-    ) {
-      return [styles.ghostName, styles.ghostNameRejected];
-    } else if (
-      selectedEvidence.length < 3 &&
-      intersection(selectedEvidence, ghost.evidence).length > 0
-    ) {
-      return [styles.ghostName];
-    } else if (
-      selectedEvidence.length === 3 &&
-      intersection(selectedEvidence, ghost.evidence).length === 3
-    ) {
-      showNotification();
-      return [styles.ghostName, styles.ghostNamePossible];
-    } else {
-      return [styles.ghostName];
     }
+    return [styles.ghostName]
   };
 
   const showNotification = () => {
@@ -175,14 +118,10 @@ const BetterEvidence = ({navigation}) => {
   return (
     <NotifierWrapper>
       <ScrollView style={styles.background}>
-        {/* <View style={styles.evidenceHeaderContainer}> */}
-          <Text style={styles.subheader}>Select evidence</Text>
-          {/* <TouchableOpacity style={styles.restartIcon}>
-            <Animated.View style={{transform: [{rotate: spin}]}}>
-              <Spinner width={20} height={20} fill="#000" />
-            </Animated.View>
-          </TouchableOpacity> */}
-        {/* </View> */}
+        <Text style={styles.subheader}>Select evidence</Text>
+        <TouchableOpacity style={styles.restartIcon} onPress={() => resetInvestigation()}>
+          <Spinner width={20} height={20} fill="#C6CACE" />
+        </TouchableOpacity>
         <View style={styles.evidenceContainer}>
           {evidenceInfo.map((evidence, key) => {
             return (
@@ -214,12 +153,11 @@ const BetterEvidence = ({navigation}) => {
             <Text style={styles.text}>Please select at least 1 evidence</Text>
           )}
           {selectedEvidence.length >= 1 &&
-            ghostInfo.map(
+            possibleGhosts.map(
               (ghost, key) =>
-                getGhostInfoVisible(ghost) && (
-                  <GhostInfoContainer ghost={ghost} key={key} />
-                ),
-            )}
+                <GhostInfoContainer ghost={ghost} key={key} />,
+            )
+          }
         </View>
       </ScrollView>
     </NotifierWrapper>
@@ -290,6 +228,9 @@ const styles = StyleSheet.create({
   restartIcon: {
     width: 20,
     height: 20,
+    position: 'absolute',
+    top: 0,
+    right: 10,
   },
 
   background: {

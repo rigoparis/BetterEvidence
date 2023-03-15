@@ -122,16 +122,16 @@ const HuntTimer = () => {
   const getLabels = () => {
     switch (huntStatus) {
       case 0:
-        return <Text style={[styles.label, {left: '20%'}]}>Make sure to know your nearest hiding spot</Text>;
+        return <Text style={[styles.label]}>Make sure to know your nearest hiding spot</Text>;
         break;
       case 1:
-        return <Text style={[styles.label, {left: '45%'}]}>DANGER!</Text>
+        return <Text style={[styles.label]}>DANGER!</Text>
         break;
       case 2:
         return (
           <>
-            <Text style={[styles.label, { color: getDemonColor(), left: '73%' }]}>Demon</Text>
-            <Text style={[styles.label, { color: getRestColor(), left: '90%' }]}>Others</Text>
+            <Text style={[styles.label, { color: getDemonColor(), left: '80%' }]}>Demon</Text>
+            <Text style={[styles.label, { color: getRestColor(), right: 0 }]}>Others</Text>
           </>
         )
       default:
@@ -166,10 +166,7 @@ const HuntTimer = () => {
           width={null} 
           height={30}
           />
-          {/* {renderLines()} */}
-          {/* <View style={[styles.mark, { left: '25%' }]}></View>
-          <View style={[styles.mark, { left: '50%' }]}></View>
-          <View style={[styles.mark, { left: '75%' }]}></View> */}
+          {huntStatus === 2 && <View style={[styles.mark, { backgroundColor: getDemonColor(), left: '80%' }]}></View>}
         </View>
       </View>
     </TouchableOpacity>

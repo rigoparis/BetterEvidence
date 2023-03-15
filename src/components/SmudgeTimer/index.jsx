@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 const SmudgeTimer = () => {
-  const [duration, setDuration] = useState(180)
+  const [duration, setDuration] = useState(180);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progress, setProgress] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -81,12 +81,14 @@ const SmudgeTimer = () => {
       </View>
       <View style={styles.progressBarContainer}>
         <View style={styles.labelContainer}>
-          <Text style={[styles.label, { color: getDemonColor(), left: '28%' }]}>Demon</Text>
-          <Text style={[styles.label, { color: getRestColor(), left: '45%' }]}>Others</Text>
-          <Text style={[styles.label, { color: getSpiritColor(), left: '92%' }]}>Spirit</Text>
+          <Text style={[styles.label, { color: getDemonColor(), left: '33%' }]}>Demon</Text>
+          <Text style={[styles.label, { color: getRestColor(), left: '50%' }]}>Others</Text>
+          <Text style={[styles.label, { color: getSpiritColor(), right: 0 }]}>Spirit</Text>
         </View>
         <View>
           <Progress.Bar unfilledColor={'#446D92'} color={'#0A0C0F'} borderColor={'#446D92'} borderWidth={1} progress={progress} width={null} height={30}/>
+          <View style={[styles.mark, { backgroundColor: getDemonColor(), left: '33%' }]}></View>
+          <View style={[styles.mark, { backgroundColor: getRestColor(), left: '50%' }]}></View>
         </View>
       </View>
     </TouchableOpacity>
@@ -134,8 +136,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   labelContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-around',
     marginBottom: 5,
     height: 15,
   },
@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
     top: 0,
     width: 4,
     height: '100%',
-    backgroundColor: '#0A0C0F',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: -2,
