@@ -1,298 +1,555 @@
 [
   {
-    "name": "Banshee",
-    "evidence": ["FINGERPRINTS", "GHOSTORB", "DOTS"],
+    "name": "Spirit",
+    "evidence": ["EMF", "SPIRITBOX", "WRITINGBOOK"],
+    "strengths": ["A basic ghost with no real strength"],
+    "weaknesses": [
+      "A Spirit can be temporarily stopped by burning Smudge near them"
+    ],
+    "noEvidenceTells": ["Smudge hunt prevention lasts for 180s"],
+    "uniqueness": [
+      "When a Spirit is smudged it will prevent the spirit from hunting again for 180 seconds, instead of the normal 90 seconds for most other ghosts. (60 seconds for demon)"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Wraith",
+    "evidence": ["EMF", "SPIRITBOX", "DOTS"],
     "strengths": [
-      "Focuses on the same player until that player is killed or has left the game"
+      "Wraiths almost never touch the ground, meaning they cannot be tracked by UV footsteps"
     ],
-    "abilities": [
-      "Can produce a unique screech on the parabolic microphone",
-      "Performs melodic ghost events more often than other ghost types"
+    "weaknesses": ["Wraiths will not step in salt"],
+    "noEvidenceTells": [
+      "Cannot disturb salt piles",
+      "Teleports to player outside of an event and gives EMF"
     ],
-    "weaknesses": []
+    "uniqueness": [
+      "Wraith will never step in salt and is not affected by the Tier 3 salt mechanics",
+      "Wraith can teleport silently to a player outside of a ghost event. When it does so, it will leave an EMF reading at the player location then walk back to it's room",
+      "After teleporting, Wraith can interact with objects, do ghost events, or even hunt before going back to it's room",
+      "Wraith can be found pretty far from it's favorite room"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Phantom",
+    "evidence": ["SPIRITBOX", "UV", "DOTS"],
+    "strengths": [
+      "Looking at a Phantom will drop your sanity considerably faster"
+    ],
+    "weaknesses": [
+      "Taking a photo of the Phantom will make it temporarily disappear"
+    ],
+    "noEvidenceTells": [
+      "Disappears when ghost event photo taken",
+      "Will walk to player and give EMF",
+      "Less visible during hunt"
+    ],
+    "uniqueness": [
+      "Phantom will disappear immediately after taking a photo of it during a ghost event, and often continue making noise while invisible",
+      "When taking a photo of the Phantom in the DOTS state, it will also disappear",
+      "The ghost will not show up in the actual photo",
+      "When hunting it will be more invisible while flashing than other ghosts",
+      "Phantoms like to follow players around. To help keep the phantom near its room, have all party members stick together. This will make evidence and objectives easier to get"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Poltergeist",
+    "evidence": ["SPIRITBOX", "UV", "WRITINGBOOK"],
+    "strengths": [
+      "Poltergeists can throw multiple objects at once, and with great force"
+    ],
+    "weaknesses": ["With nothing to throw, the Poltergeist becomes powerless"],
+    "noEvidenceTells": [
+      "Throws multiple objects at once",
+      "Throws a lot during hunts"
+    ],
+    "uniqueness": [
+      "The Poltergeist has a chance to throw many objects at once, greatly decreasing player sanity by 2% per item thrown",
+      "Poltergeist also throws objects more often than other ghosts both normally and during the hunt",
+      "It has a 100% chance to throw an object nearby during a hunt every .5 seconds, compared to 50% for other ghosts",
+      "In the Apocalypse update, Polty was given the Oni ability to throw things harder. It can now throw things at a power of 2-6 compared to 0-3 for all other ghosts",
+      "To determine Poltergeist, make piles of multiple items and see if it throws all at once"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Banshee",
+    "evidence": ["UV", "GHOSTORBS", "DOTS"],
+    "strengths": ["Banshee will weaken their target before striking"],
+    "weaknesses": [
+      "Banshee can sometimes be heard screaming with parabolic Microphone"
+    ],
+    "noEvidenceTells": [
+      "Unique parabolic mic scream",
+      "Follows target player-set up motions sensors",
+      "Ignores non targets during the hunt",
+      "Increased chance for singing ghost events",
+      "Ignores average sanity and can hunt when target is at or below 50%",
+      "Will often stalk its target while wandering"
+    ],
+    "uniqueness": [
+      "Banshee hunts based off of target's sanity. Hunts at 50% target sanity. Ignores average sanity",
+      "The Banshee will only target one player for the duration of the run as long as that player is alive and inside the house. If the target is outside the house, the banshee will hunt normally. If the player dies, Banshee will select a new target",
+      "15% sanity drain during singing events on the Banshee target if target touches the ghost compared to the normal 10%",
+      "If the target is above 50% sanity, whether inside the house or not, the banshee cannot hunt"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Jinn",
+    "evidence": ["EMF", "UV", "FREEZING"],
+    "strengths": [
+      "Jinn will travel at a faster speed if its victim is far away"
+    ],
+    "weaknesses": [
+      "Turning off the location power source will prevent Jinn from using its ability"
+    ],
+    "noEvidenceTells": [
+      "When breaker is on, Jinn is fast when player in LOS, slows down when close",
+      "Ability gives EMF at breaker",
+      "Jinn cannot directly turn off the breaker"
+    ],
+    "uniqueness": [
+      "When targeting a player during a hunt, the Jinn is faster when power is on. When it gets within 3m of the player, the Jinn will slow down",
+      "Jinn also has the ability to zap 25% sanity instantly when near the player and the breaker is on",
+      "It will give EMF reading at the breaker when using its sanity drain ability",
+      "Turing off the breaker will disable both of these abilities",
+      "Jinn cannot directly turn off the breaker"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Mare",
+    "evidence": ["SPIRITBOX", "GHOSTORBS", "WRITINGBOOK"],
+    "strengths": ["Mare will have an increased chance to attack in the dark"],
+    "weaknesses": [
+      "Turning the lights on around the Mare will lower its chance to attack"
+    ],
+    "noEvidenceTells": [
+      "Favors light exploding events",
+      "Will not turn on lights",
+      "Chance to turn off light immediately when turning one on"
+    ],
+    "uniqueness": [
+      "Mare can hunt at 60% if the lights are off, but not until 40% if the lights are on near the mare",
+      "Mare likes to turn lights off. They cannot turn lights on at the switch",
+      "Mare has a higher chance for breaking light event",
+      "It wanders more if lights are on in it's room",
+      "Mare has a chance to immediately switch off a light that has been turned on",
+      "To check for mare in NM mode, pay attention to light switching. Bait it by turning on lights and seeing if it will instantly turn them off"
+    ],
+    "sanityThreshold": 60,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Revenant",
+    "evidence": ["GHOSTORBS", "WRITINGBOOK", "FREEZING"],
+    "strengths": [
+      "Revenant will travel at a significantly faster speed when hunting their prey"
+    ],
+    "weaknesses": [
+      "Hiding from the Revenant will cause it to move very slowly"
+    ],
+    "noEvidenceTells": [
+      "Slow hunt speed when player location is unknown",
+      "Instant speed when sensing player"
+    ],
+    "uniqueness": [
+      "Revenant will be very slow when player location is not known. (1m/s)",
+      "When player locations is known, however, it will instantly speed to 3m/s",
+      "After reaching last known location, it will slow back down gradually if target is not found",
+      "Very distinct, slow footsteps when player locations is unknown",
+      "The best way to determine if you have a Revenant is through the hunt",
+      "Previously the Revenant was both the fastest and slowest ghost in the game. However currently Moroi is the fastest, and Deogen is the slowest"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Shade",
+    "evidence": ["EMF", "WRITINGBOOK", "FREEZING"],
+    "strengths": ["Harder to find due to it being generally less active"],
+    "weaknesses": [
+      "The ghost will not enter a hunt if there are any players nearby"
+    ],
+    "noEvidenceTells": [
+      "Favors shadow events",
+      "Overall less active",
+      "Will not hunt if player is in room with ghost"
+    ],
+    "uniqueness": [
+      "Shade has lowered activity overall",
+      "Will more often show up in shadow form for ghost events",
+      "Less likely to show full ghost model",
+      "Ghost event chance increases the lower the average sanity gets",
+      "Will not throw or use objects if you are in the same room as the ghost. (Ghost writing is an exception)",
+      "Boring ghost? Probably a Shade"
+    ],
+    "sanityThreshold": 35,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
   },
   {
     "name": "Demon",
-    "evidence": ["FINGERPRINTS", "WRITINGBOOK", "THERMOMETER"],
-    "strengths": [
-      "Has a lower hunt cooldown than other ghosts, potentially allowing it to hunt more often than other ghosts",
-      "Has a higher hunt sanity threshold"
+    "evidence": ["UV", "WRITINGBOOK", "FREEZING"],
+    "strengths": ["Demons will initiate hunts more often than other ghosts"],
+    "weaknesses": [
+      "Demons fear the crucifix and will be less aggressive near one"
     ],
-    "abilities": [
-      "Rare chance to hunt at any sanity percentage"
+    "noEvidenceTells": [
+      "Early hunter",
+      "20 second min hunt cool down",
+      "Smudge hunt prevention lasts 60s minimum"
+    ],
+    "uniqueness": [
+      "Demon can hunt at 70% naturally, with a rare chance to hunt at any sanity",
+      "Demon minimum cooldown between hunts is 20 seconds compared to the 25 second cooldown for all other ghosts",
+      "Smudging a demon outside of a hunt will only prevent it from hunting for 60 seconds compared to the usual 90 seconds for other ghosts (180 for spirit)",
+      "Crucifix has a 50% increase to range for all tiers of crucifix"
+    ],
+    "sanityThreshold": 70,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Yurei",
+    "evidence": ["GHOSTORBS", "FREEZING", "DOTS"],
+    "strengths": [
+      "Yurei has been known to have a stronger effect on people's sanity"
     ],
     "weaknesses": [
-      "Increased effective crucifix range"
-    ]
+      "Smudging a Yurei's place of death will trap it temporarily, reducing how much it wanders"
+    ],
+    "noEvidenceTells": [
+      "15% sanity drain with door close",
+      "Smudge traps ghost in room"
+    ],
+    "uniqueness": [
+      "Yurei has the ability to zap 15% sanity if nearby",
+      "If it uses its ability, it will also fully close a door in its room as a sign to check your sanity",
+      "When smudged, Yurei will be trapped in its room for a period of time",
+      "Yurei is not the only ghost that can close the door in the same fashion. All ghosts can do this, but Yurei does it more often as it also accompanies its sanity drain ability. Yurei is the only ghost that can close an exit door outside of a hunt or ghost event."
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Oni",
+    "evidence": ["EMF", "FREEZING", "DOTS"],
+    "strengths": [
+      "Oni is much more active when players are nearby, and will drain sanity faster when manifesting"
+    ],
+    "weaknesses": ["Oni disappears less often while hunting their prey"],
+    "noEvidenceTells": [
+      "Double sanity drain when touched by ghost event",
+      "More visible during hunts"
+    ],
+    "uniqueness": [
+      "Oni cannot do the 'ghost mist' ghost event and has a higher chance to show actual full form during ghost events (not shadow or stealth)",
+      "Always pay attention to which ghost events you get",
+      "Oni will now drain double the sanity when a ghost event hits you",
+      "Will now flash less during a hunt causing it to be visible for longer",
+      "Oni will no longer throw things higher or further than other ghosts. This ability was moved to Poltergeist in the Apocalypse update"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Yokai",
+    "evidence": ["SPIRITBOX", "GHOSTORBS", "DOTS"],
+    "strengths": [
+      "Talking near a Yokai will anger it, increasing the chance of an attack"
+    ],
+    "weaknesses": ["When hunting, a Yokai can only hear voices close to it"],
+    "noEvidenceTells": [
+      "More active when talking nearby",
+      "Early hunter when talking nearby"
+    ],
+    "uniqueness": [
+      "50% normally with a chance to hunt up to 80% when players nearby are talking",
+      "During a hunt, Yokai cannot detect your voice OR sense your equipment further than 2.5m away",
+      "You can get much closer to the yokai with the music box before it will break",
+      "Ghost activity is increased when talking near a Yokai"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Hantu",
+    "evidence": ["UV", "GHOSTORBS", "FREEZING"],
+    "strengths": [
+      "Lower temperatures allow the Hantu to move at faster speeds"
+    ],
+    "weaknesses": ["Hantu moves slower in warmer areas"],
+    "noEvidenceTells": [
+      "Speed fluctuation during hunt",
+      "Faster in colder areas"
+    ],
+    "uniqueness": [
+      "No LOS speed increase",
+      "Hantu cannot turn the breaker on and has an increased chance to turn off the breaker",
+      "Hantu will produce freezing breath in any room during a hunt if the breaker is off",
+      "The lower the temps in the room, the quicker the Hantu will be",
+      "1.4 m/s if 15°C+",
+      "1.75 m/s if 12°C",
+      "2.1 m/s if 9°C",
+      "2.3 m/s if 6°C",
+      "2.5 m/s if 3°C",
+      "2.7 m/s if 0°C"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Goryo",
+    "evidence": ["EMF", "UV", "DOTS"],
+    "strengths": [
+      "Goryo will usually only show itself on camera if there are no people nearby"
+    ],
+    "weaknesses": ["They are rarely seen far from their place of death"],
+    "noEvidenceTells": [
+      "Does not wander as far from its room",
+      "Cannot change favorite room"
+    ],
+    "uniqueness": [
+      "Goryo DOTS evidence can only be seen through the video camera",
+      "DOTS will not show if a player is in the same room, however, DOTS state can start outside of a room, and enter a room where a player is",
+      "DOTS will always be one of the 2 evidences given for Goryo in Nightmare mode",
+      "Goryo will not leave its room as often as other ghosts, and can no longer change favorite rooms",
+      "If you see DOTS without the use of a video camera, you can rule out Goryo"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Myling",
+    "evidence": ["EMF", "UV", "WRITINGBOOK"],
+    "strengths": ["Myling is known to be quieter when hunting"],
+    "weaknesses": [
+      "Mylings more frequently make paranormal sounds (through Parabolic Microphone)"
+    ],
+    "noEvidenceTells": [
+      "Cannot hear ghost further than 12m during hunt",
+      "More frequent parabolic responses"
+    ],
+    "uniqueness": [
+      "Myling  can only be heard during the hunt at a range of 12 meters or less. This now includes both footsteps AND vocal hunt noises. All other ghosts can be heard up to 20 meters away",
+      "Myling can respond more frequently through the parabolic microphone"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Onryo",
+    "evidence": ["SPIRITBOX", "GHOSTORBS", "FREEZING"],
+    "strengths": ["Onryo can cause an attack when extinguishing flames"],
+    "weaknesses": ["When threatened, Onryo will be less likely to hunt"],
+    "noEvidenceTells": [
+      "Lit flames nearby prevent hunt",
+      "Can force hunt by having ghost blow out 3 flames if not other flames are nearby"
+    ],
+    "uniqueness": [
+      "Hunts normally at 60% with a chance to hunt at 100% when extinguishing flames",
+      "Onryo cannot hunt within 4 meters of a flame, however if it blows 3 flames and there are no other flames within a 4m radius to prevent it from hunting, it will trigger a hunt at any sanity",
+      "The chance to blow out candles increases when a player dies"
+    ],
+    "sanityThreshold": 60,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "The Twins",
+    "evidence": ["EMF", "SPIRITBOX", "FREEZING"],
+    "strengths": [
+      "Either Twin can be angered and initiate an attack on their prey"
+    ],
+    "weaknesses": [
+      "The Twins will often interact with the environment at the same time"
+    ],
+    "noEvidenceTells": [
+      "Varying speeds between hunts",
+      "Interactions in multiple areas at once"
+    ],
+    "uniqueness": [
+      "The twin ghost can interact with multiple objects in different rooms at the same time. Think of it as one ranged and one melee interaction together",
+      "It can hunt from either the melee location or the ranged location",
+      "When hunting from the ranged location, the hunt speed slightly faster (1.9), and the melee location hunt speed is slightly slower (1.5) than normal ghost speed of 1.7m/s."
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Raiju",
+    "evidence": ["EMF", "GHOSTORBS", "DOTS"],
+    "strengths": [
+      "A Raiju can siphon power from nearby electrical devices, making it move faster"
+    ],
+    "weaknesses": [
+      "Raiju are constantly disrupting electronic equipment when attacking, making it easier to track"
+    ],
+    "noEvidenceTells": [
+      "Early hunt and fast hunt speed around active electronics"
+    ],
+    "uniqueness": [
+      "Hunts at 50% normally. 65% when near active electronics",
+      "Raiju will be very fast around powered player equipment",
+      "To benefit from the speed increase, Raiju needs to be within 6m of any powered piece of equipment on small maps. 8m on medium maps, and 10m on large maps",
+      "Head cams are the only powered equipment that do not affect Raiju speeds",
+      "When hunting, electronics will malfunction at 15m for Raiju, as opposed to 10m for every other ghost",
+      "To slow the Raiju down, turn off all electronics that you brought into the house"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Obake",
+    "evidence": ["EMF", "UV", "GHOSTORBS"],
+    "strengths": [
+      "When interacting with the environment, Obake will rarely leave a trace"
+    ],
+    "weaknesses": [
+      "Sometimes this ghost will shapeshift, leaving behind unique evidence"
+    ],
+    "noEvidenceTells": ["Will briefly change ghost model during hunt"],
+    "uniqueness": [
+      "Obake is the only ghost that can produce 6 fingered fingerprints in addition to all other normal prints",
+      "While fingerprints will always be one of the 2 evidences on NM mode, it still has a 25% chance to not leave one when touching something",
+      "Obake can cut the duration of all remaining fingerprints in half if it uses it's ability",
+      "If Obake is suspected, pay close attention to FP",
+      "Obake has learned to shape shift. It can flash a different ghost model for a brief second during the hunt"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "The Mimic",
+    "evidence": ["GHOSTORBS", "SPIRITBOX", "FREEZING", "UV"],
+    "strengths": ["Mimics ghost abilites"],
+    "weaknesses": ["Will always have Ghost Orbs as evidence"],
+    "noEvidenceTells": [
+      "Will show orbs when 0 evidence",
+      "Mimics any ghost abilities",
+      "Varying speeds between hunts"
+    ],
+    "uniqueness": [
+      "The Mimic can hunt following the rules for whichever ghost it is mimicking at the time.",
+      "The Mimic will copy the behavior of any ghost type both during the hunt as well as outside of the hunt",
+      "In Nightmare mode, the Mimic will show 2 of it's 3 evidence in addition to orbs. In all other modes, the mimic will show all 3 evidence, plus orbs",
+      "Evidence is the easiest way to determine if you have a mimic however often you may notice some of the more obvious traits of the ghosts it mimics",
+      "It will change what ghost it mimics every 30 seconds to 2 minutes and can change several times a round",
+      "Mimic cannot change behaviors mid hunt",
+      "Mimic only mimics abilites, not evidence"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
+  },
+  {
+    "name": "Moroi",
+    "evidence": ["SPIRITBOX", "WRITINGBOOK", "FREEZING"],
+    "strengths": ["The weaker their victims, the stronger the Moroi Becomes"],
+    "weaknesses": [
+      "Moroi suffer from hyperosmia, weakening them for longer periods"
+    ],
+    "noEvidenceTells": [
+      "Faster when lower sanity (starting below 45 sanity)",
+      "Double sanity drain after getting parabolic response"
+    ],
+    "uniqueness": [
+      "Moroi will curse a player who gets spirit box or parabolic mic response with double the passive sanity drain",
+      "Lights and Candles do not stop the cursed sanity drain",
+      "When outside the house the curse is paused",
+      "Taking sanity pills will remove the curse",
+      "Smudging during the hunt will blind the Moroi for 7.5 seconds instead of 5 for all other ghosts",
+      "Moroi is faster the lower your sanity is, varying from 1.5 m/s at its slowest up to 2.25 m/s at its fastest",
+      "Always has sprit box in Nightmare"
+    ],
+    "sanityThreshold": 50,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
   },
   {
     "name": "Deogen",
     "evidence": ["SPIRITBOX", "WRITINGBOOK", "DOTS"],
     "strengths": [
-      "Always knows where players are during a hunt",
-      "Moves at a high speed with no player nearby"
-    ],
-    "abilities": [
-      "Produces a unique response through the Spirit Box"
+      "Deogen constantly sense the living. You can run but you can't hide"
     ],
     "weaknesses": [
-      "Significantly slows down when near its target",
-      "Has a lower hunt sanity threshold"
-    ]
-  },
-  {
-    "name": "Goryo",
-    "evidence": ["EMF", "FINGERPRINTS", "DOTS"],
-    "strengths": [
-      "Only shows itself passing through D.O.T.S on video camera when no players are nearby"
+      "Deogen require a lot of energy to form and will move very slowly when approaching its victim"
     ],
-    "abilities": [],
-    "weaknesses": [
-      "Has a lower chance of producing activity far from its room or changing the room itself"
-    ]
-  },
-  {
-    "name": "Hantu",
-    "evidence": ["GHOSTORB", "THERMOMETER", "FINGERPRINTS"],
-    "strengths": [
-      "Moves quicker in colder areas during hunts"
+    "noEvidenceTells": [
+      "Cannot hide from Deo",
+      "Fast further away",
+      "Super slow when close to player",
+      "Visible for longer during hunts"
     ],
-    "abilities": [
-      "Has a chance of emitting frosty breath when hunting"
+    "uniqueness": [
+      "Deogen knows where you are at all times",
+      "Hunts at 40% sanity",
+      "Super fast when far away, but super slow when close to it's target",
+      "Can change targets mid hunt",
+      "No line of sight acceleration",
+      "Will be visible for longer during hunts",
+      "Has a unique spirit box sound",
+      "Decreased spirit box range for unique sound",
+      "Always has spirit box on nightmare mode"
     ],
-    "weaknesses": [
-      "Moves slower in warmer areas during hunts"
-    ]
-  },
-  {
-    "name": "Jinn",
-    "evidence": ["EMF", "THERMOMETER", "FINGERPRINTS"],
-    "strengths": [
-      "Gets a speed boost when chasing a player that is far away when the fuse box is on"
-    ],
-    "abilities": [
-      "Will consume nearby players' sanity when the fuse box is on"
-    ],
-    "weaknesses": [
-      "Cannot consume player sanity nor get a speed boost when the fuse box is off",
-      "Cannot turn off the fuse box"
-    ]
-  },
-  {
-    "name": "Mare",
-    "evidence": ["GHOSTORB", "SPIRITBOX", "WRITINGBOOK"],
-    "strengths": [
-      "Hunts at a higher sanity threshold in the dark"
-    ],
-    "abilities": [
-      "Turns off lights and breaks lightbulbs more often",
-      "May turn off a light immediately after a player turns one on",
-      "Chooses unlit rooms to remain in more often"
-    ],
-    "weaknesses": [
-      "Hunts at a lower sanity threshold in a lit room"
-    ]
-  },
-  {
-    "name": "Moroi",
-    "evidence": ["SPIRITBOX", "THERMOMETER", "WRITINGBOOK"],
-    "strengths": [
-      "Hunting speeds depend directly on average team sanity"
-    ],
-    "abilities": [
-      "Can curse players through the spirit box or the paramic, making them lose sanity faster"
-    ],
-    "weaknesses": [
-      "Will be disoriented for longer when smudged during a hunt"
-    ]
-  },
-  {
-    "name": "Myling",
-    "evidence": ["EMF", "FINGERPRINTS", "WRITINGBOOK"],
-    "strengths": [
-      "Has quieter footsteps and vocalizations during hunts"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Produces paranormal sounds more frequently"
-    ]
-  },
-  {
-    "name": "Obake",
-    "evidence": ["EMF", "GHOSTORB", "FINGERPRINTS"],
-    "strengths": [
-      "Fingerprints disappear faster than for other ghost types"
-    ],
-    "abilities": [
-      "Has a chance to blink in a different ghost model when hunting"
-    ],
-    "weaknesses": [
-      "Can leave a unique fingerprint pattern"
-    ]
-  },
-  {
-    "name": "Oni",
-    "evidence": ["EMF", "THERMOMETER", "DOTS"],
-    "strengths": [
-      "More active when people are nearby"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Cannot produce \"airball\" ghost events",
-      "Model remains visible for longer periods when hunting"
-    ]
-  },
-  {
-    "name": "Onryo",
-    "evidence": ["GHOSTORB", "SPIRITBOX", "THERMOMETER"],
-    "strengths": [
-      "Chance to hunt at any sanity after blowing out a flame",
-      "Blows out fiery objects (candles, campfire) more often than other ghost types"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Presence of flames prevents the ghost from hunting"
-    ]
-  },
-  {
-    "name": "Phantom",
-    "evidence": ["SPIRITBOX", "FINGERPRINTS", "DOTS"],
-    "strengths": [
-      "Additional sanity drain from players within its line-of-sight during manifestations and hunts"
-    ],
-    "abilities": [
-      "Can walk towards a random player, becoming active near them, outside of ghost events and hunts"
-    ],
-    "weaknesses": [
-      "Taking a picture of the Phantom renders it temporarily invisible",
-      "Model remains invisible for longer periods when hunting"
-    ]
-  },
-  {
-    "name": "Poltergeist",
-    "evidence": ["SPIRITBOX", "FINGERPRINTS", "WRITINGBOOK"],
-    "strengths": [
-      "Sanity decrease stacks up during multithrow interactions"
-    ],
-    "abilities": [
-      "Can throw multiple objects at once",
-      "Can throw a single object farther than other types"
-    ],
-    "weaknesses": [
-      "Ineffective in empty rooms with no throwables"
-    ]
-  },
-  {
-    "name": "Raiju",
-    "evidence": ["EMF", "GHOSTORB", "DOTS"],
-    "strengths": [
-      "Active electronics boost its speed during hunts"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Disrupts electronics from further away when manifesting"
-    ]
-  },
-  {
-    "name": "Revenant",
-    "evidence": ["GHOSTORB", "THERMOMETER", "WRITINGBOOK"],
-    "strengths": [
-      "Significant speed increase when chasing a player during hunts"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Roaming speed remains low or drop over time when no player is detected"
-    ]
-  },
-  {
-    "name": "Shade",
-    "evidence": ["EMF", "THERMOMETER", "WRITINGBOOK"],
-    "strengths": [
-      "Harder to find due to it being generally less active"
-    ],
-    "abilities": [
-      "Produces hissing and shadowy form ghost events more often"
-    ],
-    "weaknesses": [
-      "Has a low hunt sanity threshold",
-      "Generally unwilling to hunt and perform interactions in the presence of players"
-    ]
-  },
-  {
-    "name": "Spirit",
-    "evidence": ["SPIRITBOX", "EMF", "WRITINGBOOK"],
-    "strengths": [],
-    "abilities": [],
-    "weaknesses": [
-      "Lit smudge sticks double the hunt cooldown"
-    ]
+    "sanityThreshold": 40,
+    "sanityThresholdNote": false,
+    "footstepSpeed": 1.7
   },
   {
     "name": "Thaye",
-    "evidence": ["GHOSTORB", "WRITINGBOOK", "DOTS"],
+    "evidence": ["GHOSTORBS", "WRITINGBOOK", "DOTS"],
     "strengths": [
-      "Becomes very active the first time a player gets nearby"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "The more time players spend near it, the quieter and slower it becomes"
-    ]
-  },
-  {
-    "name": "The Mimic",
-    "evidence": ["GHOSTORB", "SPIRITBOX", "THERMOMETER", "FINGERPRINTS"],
-    "strengths": [
-      "Mimics other ghost types one after another for brief periods of time"
-    ],
-    "abilities": [],
-    "weaknesses": [
-      "Induces Ghost Orbs as fourth evidence (third on Nightmare)"
-    ]
-  }, 
-  {
-    "name": "The Twins",
-    "evidence": ["SPIRITBOX", "EMF", "THERMOMETER"],
-    "strengths": [
-      "Can hunt from a different place than expected"
-    ],
-    "abilities": [
-      "Differing speeds depending on which twin hunts"
+      "Upon entering the location, Thaye will become active, defensive and agile"
     ],
     "weaknesses": [
-      "Can interact with the environment simultaneously"
-    ]
-  },
-  {
-    "name": "Wraith",
-    "evidence": ["SPIRITBOX", "EMF", "DOTS"],
-    "strengths": [],
-    "abilities": [
-      "Can teleport to a random player, becoming active near them, outside of ghost events and hunts"
+      "Thaye will weaken over time, making them weaker, slower and less aggressive"
     ],
-    "weaknesses": [
-      "Never steps in salt"
-    ]
-  },
-  {
-    "name": "Yokai",
-    "evidence": ["SPIRITBOX", "GHOSTORB", "DOTS"],
-    "strengths": [],
-    "abilities": [
-      "Talking near it will increase its chance of hunting and interaction rate"
+    "noEvidenceTells": [
+      "Possible early hunter",
+      "Fast when not aged",
+      "Slow when aged",
+      "Ouija board will indicate an aged Thaye"
     ],
-    "weaknesses": [
-      "Can only hear and detect electronics within 2 metres of it"
-    ]
-  },
-  {
-    "name": "Yurei",
-    "evidence": ["THERMOMETER", "GHOSTORB", "DOTS"],
-    "strengths": [],
-    "abilities": [
-      "May randomly shut a door and deduct nearby players' sanity"
+    "uniqueness": [
+      "Starts hunting at 75% scaling to a minimum 15% after aging",
+      "Thaye ages as time goes on if there is a player nearby. Starting very active and aging to a very slow, inactive ghost",
+      "Hunting threshold, activity, speed, and ghost event chance will all decrease the longer you are near the ghost",
+      "Starting hunt threshold is 75% dropping all the way down to a minimum of 15%",
+      "Thaye lower its speed when it ages. Starting at 2.7m/s and lowering to a minimum of 1m/s",
+      "Each age lowers the speed by 0.175m/s",
+      "No Line of sight acceleration",
+      "When asking 'How old are you' on the ouija board, the Thaye will respond differently depending on it's age"
     ],
-    "weaknesses": [
-      "Will be temporarily confined to its room after smudging"
-    ]
+    "sanityThreshold": 75,
+    "sanityThresholdNote": true,
+    "footstepSpeed": 1.7
   }
 ]

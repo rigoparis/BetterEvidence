@@ -1,5 +1,6 @@
 // In App.js in a new project
 
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import {View, Button, Alert} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -7,14 +8,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import KeepAwake from 'react-native-keep-awake';
 import NavigationTabs from './src/components/NavigationTabs';
 import Spinner from './src/assets/icons/spinner11.svg';
+import BannerAdContainer from './src/components/BannerAdContainer';
+import './adConfiguration.js';
 
-// function HomeScreen1() {
-//   return (
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Text>Home Screen</Text>
-//     </View>
-//   );
-// }
+function HomeScreen() {
+  return (
+    <View style={{height: '100%'}}>
+      <NavigationTabs />
+      <BannerAdContainer />
+    </View>
+  );
+}
 
 const Stack = createNativeStackNavigator();
 
@@ -46,34 +50,36 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#0A0C0F',
-          },
-          headerTintColor: '#C6CACE',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}>
-        <Stack.Screen
-          name="Better Evidence"
-          component={NavigationTabs}
-          options={{
-            headerRight: () => (
-              <Button
-                onPress={changeKeepAwake}
-                title="Stay Awake"
-                color={isAwake ? '#FDCD83' : '#4d2149'}
-              />
-            ),
-          }}
-        />
-        {/* <Stack.Screen name="Timers" component={TimersScreen} /> */}
-      </Stack.Navigator>
-      <KeepAwake />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#0A0C0F',
+            },
+            headerTintColor: '#C6CACE',
+            headerTitleStyle: {
+              fontFamily: 'PermanentMarker-Regular',
+            },
+          }}>
+          <Stack.Screen
+            name="Better Evidence"
+            component={HomeScreen}
+            options={{
+              headerRight: () => (
+                <Button
+                  onPress={changeKeepAwake}
+                  title="Stay Awake"
+                  color={isAwake ? '#FDCD83' : '#4d2149'}
+                />
+              ),
+            }}
+          />
+          {/* <Stack.Screen name="Timers" component={TimersScreen} /> */}
+        </Stack.Navigator>
+        <KeepAwake />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

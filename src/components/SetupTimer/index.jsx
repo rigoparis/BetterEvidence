@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import * as Progress from 'react-native-progress';
 
 const durations = [
-  { label: '30 seconds', value: 30 },
-  { label: '1 minute', value: 60 },
-  { label: '2 minutes', value: 120 },
-  { label: '3 minutes', value: 180 },
-  { label: '4 minutes', value: 240 },
-  { label: '5 minutes', value: 300 },
+  {label: '30 seconds', value: 30},
+  {label: '1 minute', value: 60},
+  {label: '2 minutes', value: 120},
+  {label: '3 minutes', value: 180},
+  {label: '4 minutes', value: 240},
+  {label: '5 minutes', value: 300},
 ];
 
 const SetupTimer = () => {
-  const [duration, setDuration] = useState(300)
+  const [duration, setDuration] = useState(300);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progress, setProgress] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -24,7 +24,7 @@ const SetupTimer = () => {
 
     if (timerRunning) {
       countdownInterval = setInterval(() => {
-        const newTimeLeft = timeLeft - 1
+        const newTimeLeft = timeLeft - 1;
         setTimeLeft(newTimeLeft);
         setProgress((duration - timeLeft + 1) / duration);
         if (newTimeLeft === 0) stop();
@@ -39,29 +39,31 @@ const SetupTimer = () => {
 
   const start = () => {
     setTimerRunning(true);
-  }
+  };
 
   const stop = () => {
     setTimerRunning(false);
-  }
+  };
 
   const reset = () => {
     setTimeLeft(duration);
     setProgress(0);
     setTimerRunning(false);
-  }
+  };
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, '0')}:${seconds
+      .toString()
+      .padStart(2, '0')}`;
   };
 
   const handleTimerPress = () => {
     if (progress === 0) return start();
     if (progress > 0 && timerRunning) return stop();
     if (progress > 0 && !timerRunning) return reset();
-  }
+  };
 
   const handleDurationChange = (value) => {
     setDuration(value);
@@ -75,29 +77,44 @@ const SetupTimer = () => {
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => handleTimerPress()}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => handleTimerPress()}>
       <View style={styles.header}>
         <Text style={styles.name}>Setup</Text>
         <Text style={styles.timer}>{formatTime(timeLeft)}</Text>
       </View>
       <View style={styles.progressBarContainer}>
         <View>
-          <Progress.Bar unfilledColor={'#446D92'} color={'#0A0C0F'} borderColor={'#446D92'} borderWidth={1} progress={progress} width={null} height={30}/>
+          <Progress.Bar
+            unfilledColor={'#446D92'}
+            color={'#0A0C0F'}
+            borderColor={'#446D92'}
+            borderWidth={1}
+            progress={progress}
+            width={null}
+            height={30}
+          />
         </View>
       </View>
-      {!timerRunning && progress === 0 && <View>
-        <Button title="Select Duration" onPress={() => open(true)} />
-        <Picker
+      {!timerRunning && progress === 0 && (
+        <View>
+          <Button title="Select Duration" onPress={() => open(true)} />
+          <Picker
             ref={pickerRef}
             selectedValue={duration}
             onValueChange={handleDurationChange}
-            style={styles.picker}
-          >
+            style={styles.picker}>
             {durations.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} />
+              <Picker.Item
+                key={option.value}
+                label={option.label}
+                value={option.value}
+              />
             ))}
-        </Picker>
-      </View>}
+          </Picker>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
@@ -109,11 +126,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 2,
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   header: {
     flexDirection: 'row',
@@ -123,9 +140,9 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   name: {
-    fontWeight: 'bold',
     fontSize: 25,
-    color: '#C6CACE'
+    color: '#C6CACE',
+    fontFamily: 'PermanentMarker-Regular',
   },
   timerContainer: {
     flexDirection: 'row',
@@ -140,7 +157,7 @@ const styles = StyleSheet.create({
   timer: {
     fontSize: 30,
     color: '#C6CACE',
-    fontFamily: 'VT323-Regular'
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   picker: {
     height: 0,
@@ -152,12 +169,12 @@ const styles = StyleSheet.create({
   labelContainer: {
     // flexDirection: 'row',
     // justifyContent: 'space-around',
-    marginBottom: 5,
+    marginBottom: 12,
     height: 15,
   },
   label: {
-    fontSize: 12,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'ShadowsIntoLight-Regular',
     color: '#C6CACE',
     position: 'absolute',
     top: 0,
@@ -179,8 +196,8 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
 
 export default SetupTimer;

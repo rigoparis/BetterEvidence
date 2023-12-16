@@ -2,6 +2,14 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/PermanentMarker-Regular.ttf",
+      "sha1": "bc40bfbc7eb7715af82b136429848a3c7a83a2b3"
+    },
+    {
+      "path": "src/assets/fonts/ShadowsIntoLight-Regular.ttf",
+      "sha1": "e512d65b44398e83907215402d477643751c1dfa"
+    },
+    {
       "path": "src/assets/fonts/VT323-Regular.ttf",
       "sha1": "a4cbe89ec9e1bf6ddd26c53c118f587f1b465f25"
     }

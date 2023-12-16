@@ -15,6 +15,8 @@
 		7699B88040F8A987B510C191 /* libPods-BetterEvidence-BetterEvidenceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-BetterEvidence-BetterEvidenceTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		F880BF4729D445199D00C2D7 /* VT323-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 364F317D36704E9CAAFFAFF8 /* VT323-Regular.ttf */; };
+		A328A0F7648949D2AE4BF3AC /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 801734ED9B474602A7114583 /* PermanentMarker-Regular.ttf */; };
+		09AC246E1C8E44AD8380AB3C /* ShadowsIntoLight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96BD5DCB79D3481EB399EF4D /* ShadowsIntoLight-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-BetterEvidence-BetterEvidenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterEvidence-BetterEvidenceTests.release.xcconfig"; path = "Target Support Files/Pods-BetterEvidence-BetterEvidenceTests/Pods-BetterEvidence-BetterEvidenceTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		364F317D36704E9CAAFFAFF8 /* VT323-Regular.ttf */ = {isa = PBXFileReference; name = "VT323-Regular.ttf"; path = "../src/assets/fonts/VT323-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		801734ED9B474602A7114583 /* PermanentMarker-Regular.ttf */ = {isa = PBXFileReference; name = "PermanentMarker-Regular.ttf"; path = "../src/assets/fonts/PermanentMarker-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		96BD5DCB79D3481EB399EF4D /* ShadowsIntoLight-Regular.ttf */ = {isa = PBXFileReference; name = "ShadowsIntoLight-Regular.ttf"; path = "../src/assets/fonts/ShadowsIntoLight-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,8 @@
 			isa = "PBXGroup";
 			children = (
 				364F317D36704E9CAAFFAFF8 /* VT323-Regular.ttf */,
+				801734ED9B474602A7114583 /* PermanentMarker-Regular.ttf */,
+				96BD5DCB79D3481EB399EF4D /* ShadowsIntoLight-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F880BF4729D445199D00C2D7 /* VT323-Regular.ttf in Resources */,
+				A328A0F7648949D2AE4BF3AC /* PermanentMarker-Regular.ttf in Resources */,
+				09AC246E1C8E44AD8380AB3C /* ShadowsIntoLight-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,326 @@
+[
+  {
+    "title": "Haunted Mirror",
+    "content": {
+      "uses": [
+        "The haunted mirror shows you what the ghost room/favorite room is",
+        "Also helps confirm if the ghost changes its favorite room during an investigation"
+      ],
+      "facts": [
+        "It DOES NOT show you where the ghost currently is",
+        "While looking into the mirror, it drains 7% sanity per second and a minimum of 20% per use",
+        "If you run out of sanity, the mirror will break and a cursed hunt will start"
+      ]
+    }
+  },
+  {
+    "title": "Music Box",
+    "content": {
+      "uses": [
+        "Lures the ghost. The ghost will actively look for the music box",
+        "Since it lures the ghost, it can be used for photos and controlling hunts"
+      ],
+      "facts": [
+        "Being close to the music box while it is playing will drain your sanity",
+        "If you throw the music box instead of placing it, it will break and start a cursed hunt"
+      ]
+    }
+  },
+  {
+    "title": "Ouija Board",
+    "content": {
+      "uses": ["Ghost control and information giver"],
+      "facts": [
+        "While holding the ouija board press right click/right mouse button. The planchette will land and the Ouija is now 'on'",
+        "Anyone can ask it questions if they're close enough",
+        "Asking questions uses sanity. Some questions use more sanity than others",
+        "If the person who summoned the planchette walks too far away from the ouija board it will explode and start a cursed hunt. Make sure to say 'goodbye!'"
+      ],
+      "questions": [
+        {
+          "category": "Location",
+          "description": "Get ghost location. Doesn't specify the ghost's favorite room",
+          "questions": [
+            "Where are you?",
+            "What is your favorite room?",
+            "Where is your room?",
+            "What is your room?"
+          ],
+          "answers": ["Room name"],
+          "sanityDrain": 50,
+          "hasTextOption": true
+        },
+        {
+          "category": "Location (non-specific)",
+          "description": "Yes or not answer if the ghost is near",
+          "questions": ["Are you here?", "Are you close?"],
+          "answers": ["Yes/No"],
+          "sanityDrain": 20,
+          "hasTextOption": false
+        },
+        {
+          "category": "Bone Location",
+          "description": "Location of the bone",
+          "questions": [
+            "Where is the bone?",
+            "Where did you die?",
+            "Where is your body?"
+          ],
+          "answers": ["Room name"],
+          "sanityDrain": 50,
+          "hasTextOption": true
+        },
+        {
+          "category": "Hide and Seek",
+          "description": "Play hide and seek with the ghost ;)",
+          "questions": ["(Do you want to play) hide and seek?"],
+          "answers": [
+            "Ouija board will count down from 5 to 0, try to beat the ghost ;)"
+          ],
+          "sanityDrain": 0,
+          "hasTextOption": true
+        },
+        {
+          "category": "Age",
+          "description": "Get age of the ghost. Thayes will age periodically during the run",
+          "questions": [
+            "How old are you?",
+            "What is your age?",
+            "Are you old?",
+            "Are you young?"
+          ],
+          "answers": [
+            "2 - 90. Thayes can go over this limit, while aging during the run"
+          ],
+          "sanityDrain": 5,
+          "hasTextOption": true
+        },
+        {
+          "category": "Death",
+          "description": "Years since death of the ghost",
+          "questions": [
+            "How long have you been dead?",
+            "How many years ago did you die?",
+            "How long have you been here?",
+            "How long ago did you die?",
+            "When did you die?"
+          ],
+          "answers": ["50 - 1000"],
+          "sanityDrain": 5,
+          "hasTextOption": false
+        },
+        {
+          "category": "Sanity",
+          "description": "Get a rough estimate of your sanity",
+          "questions": [
+            ["What is my sanity?"],
+            ["How crazy am I?", "How insane am I?"],
+            ["Am I insane?"]
+          ],
+          "answers": [
+            [
+              "> 80%: Healthy",
+              "60% - 80% Good",
+              "40% - 60%: Average",
+              "20%-40%: Bad",
+              "< 20%: Awful"
+            ],
+            ["> 50%: Not Very", "25% - 50%: Very", "< 25%: Insane"],
+            ["> 90% No", "20% - 90%: Maybe", "< 20%: Yes"]
+          ],
+          "sanityDrain": 5,
+          "hasTextOption": false
+        }
+      ]
+    }
+  },
+  {
+    "title": "Summoning Circle",
+    "content": {
+      "uses": ["Control hunt objectives", "Ghost photos"],
+      "facts": [
+        "Lighting a candle burns 16% sanity",
+        "Anyone near the summoning circle when candles are lit will also lose sanity",
+        "When all candles are lit the ghost will be trapped in the circle for a few seconds or as short as one second. Be prepared with your camera and smudge stick!"
+      ]
+    }
+  },
+  {
+    "title": "Tarot Cards",
+    "content": {
+      "uses": ["Random stuff will happen"],
+      "facts": [
+        "There are a total of 10 different tarot cards",
+        "Each deck has 10 draws and you can draw any card more than once"
+      ],
+      "cards": [
+        {
+          "name": "The Tower",
+          "chanceToDraw": "20%",
+          "effect": "Forces an interaction and doubles ghost activity for 20 seconds"
+        },
+        {
+          "name": "The Wheel of Fortune",
+          "chanceToDraw": "20%",
+          "effect": "Gain 25% sanity [Green Burn], Lose 25% sanity [Red Burn]"
+        },
+        {
+          "name": "The Fool",
+          "chanceToDraw": "17% or 100% during hunt",
+          "effect": "Does nothing. The Fool is techincally already drawn and the game rolls 1/9 randomly to see which card it will display before revealing the fool"
+        },
+        {
+          "name": "The Devil",
+          "chanceToDraw": "10%",
+          "effect": "Forces a ghost event"
+        },
+        {
+          "name": "Death",
+          "chanceToDraw": "10%",
+          "effect": "Forces a ghost hunt"
+        },
+        {
+          "name": "The Hermit",
+          "chanceToDraw": "10%",
+          "effect": "Forces an interaction and doubles ghost activity for 20 seconds"
+        },
+        {
+          "name": "The Sun",
+          "chanceToDraw": "5%",
+          "effect": "Restore your sanity to 100%"
+        },
+        {
+          "name": "The Moon",
+          "chanceToDraw": "5%",
+          "effect": "Reduces your sanity to 0%"
+        },
+        {
+          "name": "The High Priestess",
+          "chanceToDraw": "2%",
+          "effect": "Resurrects a dead player. If there is more than one dead player the card will resurrect a random dead player. If there are no dead players then the card will resurrect the next player to die"
+        },
+        {
+          "name": "The Hanged Man",
+          "chanceToDraw": "1%",
+          "effect": "Kills you instantly"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Voodoo Doll",
+    "content": {
+      "uses": ["Forces interactions"],
+      "facts": [
+        "Pricking the voodoo doll uses 5% sanity",
+        "You can prick the voodoo doll up to 10 times",
+        "Each prick has a chance to prick the heart, which will start a cursed hunt",
+        "If using the voodoo doll reduces your sanity to 0% it will use all pricks and start a cursed hunt"
+      ]
+    }
+  },
+  {
+    "title": "Monkey Paw",
+    "content": {
+      "uses": ["Grants wishes"],
+      "facts": [
+        "Monkey Paw is one of the 7 cursed possessions that has a 1/7 chance to spawn on any map when your difficulty allows it. Some are hidden quite well."
+      ],
+      "wishes": [
+        {
+          "wish": "I wish to see the ghost",
+          "positiveEffects": ["Triggers a ghost event at the ghost location"],
+          "negativeEffects": [
+            "Instantly locks the exit doors",
+            "Initiates a hunt immediately following the ghost event",
+            "Reduces player vision for the remainder of that hunt with a black fog."
+          ]
+        },
+        {
+          "wish": "I wish for activity",
+          "positiveEffects": [
+            "Doubles all ghost activity for 2 minutes which includes interactions, roaming and abilities"
+          ],
+          "negativeEffects": [
+            "Breaks the fuse box and locks the exit doors for 2 minutes"
+          ]
+        },
+        {
+          "wish": "I wish for sanity",
+          "positiveEffects": ["Averages the team sanity to 50%"],
+          "negativeEffects": [
+            "Sets the ghosts favorite room to a new, random room",
+            "Increases sanity drain by +50% of the current rate for the entire group"
+          ],
+          "note": "This wish will override Goryo's weakness. Meaning that despite the Goryo not being able to change rooms on it's own, it CAN if sanity wish is used"
+        },
+        {
+          "wish": "I wish the ghost was trapped",
+          "positiveEffects": [
+            "Teleports the ghost to its room and locks all of its doors for 1 minute",
+            "Ghost cannot hunt, roam, or do abilities while locked in its room"
+          ],
+          "negativeEffects": [
+            "Locks all doors to the room that the player who made the wish is currently in for 1 minute",
+            "The ghost will unlock all doors after 1 minute, and start a hunt",
+            "25% chance for the doors to unlock AFTER the grace period"
+          ]
+        },
+        {
+          "wish": "I wish for life / I wish to revive my friend",
+          "positiveEffects": ["Revives a dead player"],
+          "negativeEffects": ["50% chance to kill the player who uses the wish"]
+        },
+        {
+          "wish": "I wish to be safe",
+          "positiveEffects": ["Opens up the nearest hiding spot"],
+          "negativeEffects": [
+            "Smashes the lights in the room",
+            "The ghost can hear and sense the equipment of the player who made the wish during hunts from anywhere on the map for the remainder of the run"
+          ],
+          "note": "This can be used to your advantage to lure a ghost intentionally to a safer area for completing hunt objectives"
+        },
+        {
+          "wish": "I wish to leave",
+          "positiveEffects": [
+            "Unlocks all exit doors at any time, including during hunts"
+          ],
+          "negativeEffects": [
+            "Prevents you from moving instantly, then slowly returns movement speed over 5 seconds",
+            "Reduces vision for 5 seconds for the person making the wish"
+          ]
+        },
+        {
+          "wish": "I wish for knowledge",
+          "positiveEffects": [
+            "Removes 1 incorrect evidence and corresponding ghost types from your journal, narrowing down your choices"
+          ],
+          "negativeEffects": [
+            "Starts a hunt near the player",
+            "For the rest of the round, the player who made the wish will have reduced vision and muffled audio"
+          ],
+          "note": "Dying will reset audio and visual reductions back to normal and will remain normal if revived"
+        },
+        {
+          "wish": "I wish for [weather]",
+          "positiveEffects": [
+            "Allows weather change to Rain, Snow, Clear, Fog, or Sunrise"
+          ],
+          "negativeEffects": [
+            "Reduces Sanity by 25% for the person who makes the wish"
+          ],
+          "note": "Wishing for rain will give you a 50% chance to get either light or heavy rain"
+        },
+        {
+          "wish": "I wish for Anything",
+          "positiveEffects": [
+            "Any wish is randomly selected",
+            "Wishing for anything will grant you one of the remaining (unused) wishes for that round"
+          ],
+          "negativeEffects": ["Any wish is randomly selected"],
+          "note": "While you can use Anything wish more than once, it will not grant you a wish that has already been used in that run"
+        }
+      ]
+    }
+  }
+]
