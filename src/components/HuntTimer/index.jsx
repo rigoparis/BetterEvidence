@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Progress from 'react-native-progress';
 
 const HuntTimer = () => {
@@ -15,7 +15,7 @@ const HuntTimer = () => {
 
     if (timerRunning) {
       countdownInterval = setInterval(() => {
-        const newTimeLeft = timeLeft - 1
+        const newTimeLeft = timeLeft - 1;
         setTimeLeft(newTimeLeft);
         setProgress((cooldownDuration - timeLeft + 1) / cooldownDuration);
         if (newTimeLeft === 0) setTimerRunning(false);
@@ -33,7 +33,7 @@ const HuntTimer = () => {
 
     if (upTimerRunning) {
       countdownInterval = setInterval(() => {
-        const newTimeLeft = timeLeft + 1
+        const newTimeLeft = timeLeft + 1;
         setTimeLeft(newTimeLeft);
         setProgress(0);
       }, 1000);
@@ -70,103 +70,124 @@ const HuntTimer = () => {
         setUpTimerRunning(false);
         break;
     }
-  }, [huntStatus])
-  
+  }, [huntStatus]);
 
   const start = () => {
     setTimerRunning(true);
-  }
+  };
 
   const reset = () => {
     setTimeLeft(duration);
     setProgress(0);
     setTimerRunning(false);
-  }
+  };
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, '0')}:${seconds
+      .toString()
+      .padStart(2, '0')}`;
   };
 
   const handleTimerPress = () => {
     if (huntStatus === 0) return setHuntStatus(1);
     if (huntStatus === 1) return setHuntStatus(2);
     if (huntStatus === 2) return setHuntStatus(0);
-  }
+  };
 
   const getHuntStatusLabel = () => {
     if (huntStatus === 0) {
-      return "Not hunting";
+      return 'Not hunting';
     } else if (huntStatus === 1) {
-      return "Hunting...";
+      return 'Hunting...';
     } else {
-      return "Hunt Cooldown";
+      return 'Hunt Cooldown';
     }
-  }
+  };
 
   const getDemonColor = () => {
     if (progress >= 0.8) {
-      return '#ff0e0e'
+      return '#ff0e0e';
     }
-    return '#C6CACE'
-  }
+    return '#C6CACE';
+  };
 
   const getRestColor = () => {
     if (progress >= 1) {
-      return '#ff0e0e'
+      return '#ff0e0e';
     }
-    return '#C6CACE'
-  }
+    return '#C6CACE';
+  };
 
   const getLabels = () => {
     switch (huntStatus) {
       case 0:
-        return <Text style={[styles.label]}>Make sure to know your nearest hiding spot</Text>;
+        return (
+          <Text style={[styles.label]}>
+            Make sure to know your nearest hiding spot
+          </Text>
+        );
         break;
       case 1:
-        return <Text style={[styles.label]}>DANGER!</Text>
+        return <Text style={[styles.label]}>DANGER!</Text>;
         break;
       case 2:
         return (
           <>
-            <Text style={[styles.label, { color: getDemonColor(), left: '80%' }]}>Demon</Text>
-            <Text style={[styles.label, { color: getRestColor(), right: 0 }]}>Others</Text>
+            <Text style={[styles.label, {color: getDemonColor(), left: '70%'}]}>
+              Demon
+            </Text>
+            <Text style={[styles.label, {color: getRestColor(), right: 0}]}>
+              Others
+            </Text>
           </>
-        )
+        );
       default:
         break;
     }
-  }
+  };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => handleTimerPress()}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => handleTimerPress()}>
       <View style={styles.header}>
         <View>
           <Text style={styles.name}>Hunt</Text>
           <Text style={styles.huntStatus}>{getHuntStatusLabel()}</Text>
         </View>
-        {huntStatus === 0 ? <View style={{flex:0, alignItems: 'flex-end'}}>
-          <Text style={styles.touchToHunt}>Tap when hunt starts</Text>
-          <Text style={styles.touchToHunt}>Double tap when crucifix is burned</Text>
-        </View> : <Text style={styles.timer}>{formatTime(timeLeft)}</Text>}
+        {huntStatus === 0 ? (
+          <View style={{flex: 0, alignItems: 'flex-end'}}>
+            <Text style={styles.touchToHunt}>Tap when hunt starts</Text>
+            <Text style={styles.touchToHunt}>
+              Double tap when crucifix is burned
+            </Text>
+          </View>
+        ) : (
+          <Text style={styles.timer}>{formatTime(timeLeft)}</Text>
+        )}
       </View>
       <View style={styles.progressBarContainer}>
-        <View style={styles.labelContainer}>
-          {getLabels()}
-        </View>
+        <View style={styles.labelContainer}>{getLabels()}</View>
         <View>
-          <Progress.Bar 
-          indeterminate={huntStatus === 1} 
-          unfilledColor={huntStatus === 1 ? '#0A0C0F' : '#446D92'} 
-          color={huntStatus === 1 ? '#ff0505' : '#0A0C0F'} 
-          borderColor={huntStatus === 1 ? '#ff0505' : '#446D92'} 
-          borderWidth={1} 
-          progress={progress} 
-          width={null} 
-          height={30}
+          <Progress.Bar
+            indeterminate={huntStatus === 1}
+            unfilledColor={huntStatus === 1 ? '#0A0C0F' : '#446D92'}
+            color={huntStatus === 1 ? '#ff0505' : '#0A0C0F'}
+            borderColor={huntStatus === 1 ? '#ff0505' : '#446D92'}
+            borderWidth={1}
+            progress={progress}
+            width={null}
+            height={30}
           />
-          {huntStatus === 2 && <View style={[styles.mark, { backgroundColor: getDemonColor(), left: '80%' }]}></View>}
+          {huntStatus === 2 && (
+            <View
+              style={[
+                styles.mark,
+                {backgroundColor: getDemonColor(), left: '80%'},
+              ]}></View>
+          )}
         </View>
       </View>
     </TouchableOpacity>
@@ -180,11 +201,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 2,
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   header: {
     flexDirection: 'row',
@@ -194,12 +215,14 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   name: {
-    fontWeight: 'bold',
     fontSize: 25,
-    color: '#C6CACE'
+    color: '#C6CACE',
+    fontFamily: 'PermanentMarker-Regular',
   },
   huntStatus: {
-    color: '#C6CACE'
+    color: '#C6CACE',
+    fontSize: 20,
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   timerContainer: {
     flexDirection: 'row',
@@ -211,10 +234,12 @@ const styles = StyleSheet.create({
   timer: {
     fontSize: 30,
     color: '#C6CACE',
-    fontFamily: 'VT323-Regular'
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   touchToHunt: {
     color: '#C6CACE',
+    fontSize: 20,
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   progressBarContainer: {
     marginBottom: 10,
@@ -222,15 +247,15 @@ const styles = StyleSheet.create({
   labelContainer: {
     // flexDirection: 'row',
     // justifyContent: 'space-around',
-    marginBottom: 5,
+    marginBottom: 12,
     height: 15,
   },
   label: {
-    fontSize: 12,
-    fontWeight: 'bold',
+    fontSize: 20,
     color: '#C6CACE',
     position: 'absolute',
     top: 0,
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   progress: {
     height: '100%',
@@ -249,8 +274,8 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
 
 export default HuntTimer;

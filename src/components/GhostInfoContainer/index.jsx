@@ -1,23 +1,43 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import {View, Text, StyleSheet, Image} from 'react-native';
+import React from 'react';
 
-import {DOTS,EMF,FINGERPRINTS,GHOSTORB,SPIRITBOX,THERMOMETER,WRITINGBOOK} from '../../assets/evidenceImages';
+import {
+  DOTS,
+  EMF,
+  UV,
+  GHOSTORBS,
+  SPIRITBOX,
+  FREEZING,
+  WRITINGBOOK,
+} from '../../assets/evidenceImages';
+import evidenceInfo from '../../jsonInfo/evidenceInfo.json';
+import {find} from 'lodash';
 
 const GhostInfoContainer = ({ghost}) => {
-  const images = {DOTS,EMF,FINGERPRINTS,GHOSTORB,SPIRITBOX,THERMOMETER,WRITINGBOOK};
+  const images = {DOTS, EMF, UV, GHOSTORBS, SPIRITBOX, FREEZING, WRITINGBOOK};
   return (
     <View style={styles.card}>
       <View style={[styles.line, styles.header]}>
-        <Text style={styles.ghostName}>{ghost.name}</Text>
+        <View>
+          <Text style={styles.ghostName}>{ghost.name}</Text>
+          <Text style={styles.evidenceLineText}>
+            Sanity threshold: {ghost.sanityThreshold}
+            {'%'}
+            {ghost.sanityThresholdNote ? ' *' : ''}
+          </Text>
+          <Text style={styles.evidenceLineText}>
+            Speed: {ghost.footstepSpeed} m/s
+          </Text>
+        </View>
         <View style={styles.evidenceContainer}>
-          {ghost.evidence.map(
-            (evidence, key) =>
-            <Image
-              key={key}
-              style={styles.tinyLogo}
-              source={images[evidence]}
-            />
-          )}
+          {ghost.evidence.map((evidence, key) => (
+            <View key={key} style={styles.evidenceLine}>
+              <Text style={styles.evidenceLineText}>
+                {find(evidenceInfo, {keyword: evidence}).name}
+              </Text>
+              <Image style={styles.tinyLogo} source={images[evidence]} />
+            </View>
+          ))}
         </View>
       </View>
       {ghost.strengths.length > 0 ? (
@@ -28,45 +48,60 @@ const GhostInfoContainer = ({ghost}) => {
       ) : (
         <Text style={[styles.line, styles.atributeName]}>No strengths</Text>
       )}
-      {ghost.abilities.length > 0 ? (
-        <AtributeContainer
-          mainAtribute="Abilities"
-          atributeList={ghost.abilities}
-        />
-      ) : (
-        <Text style={[styles.line, styles.atributeName]}>No abilities</Text>
-      )}
       {ghost.weaknesses.length > 0 ? (
         <AtributeContainer
           mainAtribute="Weakness(es)"
           atributeList={ghost.weaknesses}
         />
       ) : (
-        <Text style={[styles.line, styles.atributeName]}>{'No weakness(es)'}</Text>
+        <Text style={[styles.line, styles.atributeName]}>
+          {'No weakness(es)'}
+        </Text>
+      )}
+      {ghost.noEvidenceTells.length > 0 ? (
+        <AtributeContainer
+          mainAtribute="0 Evidence Tells"
+          atributeList={ghost.noEvidenceTells}
+        />
+      ) : (
+        <Text style={[styles.line, styles.atributeName]}>
+          No 0 evidence tells
+        </Text>
+      )}
+      {ghost.uniqueness.length > 0 ? (
+        <AtributeContainer
+          mainAtribute="Uniqueness(es)"
+          atributeList={ghost.uniqueness}
+        />
+      ) : (
+        <Text style={[styles.line, styles.atributeName]}>No uniquenesses</Text>
       )}
     </View>
-  )
-}
+  );
+};
 
 const AtributeContainer = ({mainAtribute, atributeList}) => {
   return (
     <View>
       <Text style={[styles.line, styles.atributeName]}>{mainAtribute}</Text>
       {atributeList.map((atribute, skey) => {
-        return (<Text key={skey} style={[styles.line, styles.atributeInfo]}>{atribute}</Text>);
+        return (
+          <Text key={skey} style={[styles.line, styles.atributeInfo]}>
+            {atribute}
+          </Text>
+        );
       })}
     </View>
-  )
-}
+  );
+};
 
-export default GhostInfoContainer
+export default GhostInfoContainer;
 
 const styles = StyleSheet.create({
   card: {
     backgroundColor: 'beige',
     width: '90%',
     padding: 20,
-    fontFamily: 'Courier',
     color: '#251607',
     borderColor: '#624a2e',
     borderWidth: 3,
@@ -79,33 +114,46 @@ const styles = StyleSheet.create({
   },
   evidenceContainer: {
     flex: 0,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: 150,
+    marginVertical: 10,
+    gap: 3,
+  },
+  evidenceLine: {
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
     alignItems: 'center',
-    alignContent: 'center',
-    width: 100,
-    marginBottom: 5,
+    gap: 5,
+  },
+  evidenceLineText: {
+    color: '#251607',
+    fontSize: 20,
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   line: {
     borderBottomColor: '#CCC',
     borderBottomWidth: 1,
-    color: '#251607'
+    color: '#251607',
   },
   ghostName: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#251607'
+    fontFamily: 'PermanentMarker-Regular',
+    color: '#251607',
   },
   atributeName: {
     paddingLeft: 10,
     fontSize: 20,
-    fontWeight: 500,
+    fontFamily: 'PermanentMarker-Regular',
   },
   atributeInfo: {
     paddingLeft: 20,
+    paddingVertical: 5,
+    fontSize: 20,
+    fontFamily: 'ShadowsIntoLight-Regular',
   },
   tinyLogo: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
   },
-})
+});
