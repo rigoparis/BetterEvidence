@@ -1,20 +1,11 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
 
-import {
-  DOTS,
-  EMF,
-  UV,
-  GHOSTORBS,
-  SPIRITBOX,
-  FREEZING,
-  WRITINGBOOK,
-} from '../../assets/evidenceImages';
 import evidenceInfo from '../../jsonInfo/evidenceInfo.json';
 import {find} from 'lodash';
+import Icon from '../../assets/evidenceImages/Icon';
 
 const GhostInfoContainer = ({ghost}) => {
-  const images = {DOTS, EMF, UV, GHOSTORBS, SPIRITBOX, FREEZING, WRITINGBOOK};
   return (
     <View style={styles.card}>
       <View style={[styles.line, styles.header]}>
@@ -33,9 +24,13 @@ const GhostInfoContainer = ({ghost}) => {
           {ghost.evidence.map((evidence, key) => (
             <View key={key} style={styles.evidenceLine}>
               <Text style={styles.evidenceLineText}>
-                {find(evidenceInfo, {keyword: evidence}).name}
+                {
+                  find(evidenceInfo.starterEquipment.equipment, {
+                    keyword: evidence,
+                  }).name
+                }
               </Text>
-              <Image style={styles.tinyLogo} source={images[evidence]} />
+              <Icon keyword={evidence} size={25} />
             </View>
           ))}
         </View>
@@ -137,7 +132,7 @@ const styles = StyleSheet.create({
     color: '#251607',
   },
   ghostName: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'PermanentMarker-Regular',
     color: '#251607',
   },

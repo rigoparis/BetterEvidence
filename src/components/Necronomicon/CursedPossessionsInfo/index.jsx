@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   accordionTitle: {
     color: '#446D92',
     fontSize: 40,
-    marginVertical: 10,
+    marginVertical: 20,
     fontFamily: 'PermanentMarker-Regular',
   },
   header: {

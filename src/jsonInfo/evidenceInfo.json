@@ -1,30 +1,496 @@
-[
-  {
-    "name": "D.O.T.S Projector",
-    "keyword": "DOTS"
+{
+  "starterEquipment": {
+    "name": "Starting Equipment",
+    "equipment": [
+      {
+        "name": "D.O.T.S",
+        "equipName": "D.O.T.S. Projector",
+        "keyword": "DOTS",
+        "use": "Creates a field of green lights when placed. Used to detect D.O.T.S Projector evidence",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 65,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 29,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 60,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "EMF Level 5",
+        "equipName": "EMF Reader",
+        "keyword": "EMF",
+        "use": "Can detect EMF presence in the area. Used to obtain EMF Level 5 evidence",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 45,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 20,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 52,
+            "upgradeCost": 4500,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "Ultraviolet",
+        "equipName": "UV Light",
+        "keyword": "UV",
+        "use": "Used to reveal fingerprints and footprints created by ghosts",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 35,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 21,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 56,
+            "upgradeCost": 2000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "Freezing",
+        "equipName": "Thermometer",
+        "keyword": "FREEZING",
+        "use": "Displays the local temperature of a room. Can be used to detect Freezing Temperatures",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 30,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 36,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 64,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "Ghost Orbs",
+        "equipName": "Video Camera",
+        "keyword": "GHOSTORBS",
+        "use": "Creates a video feed, which is relayed to the van's computer. Used to detect Ghost Orbs",
+        "maxLimit": 4,
+        "storeInfo": {
+          "cost": 50,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 33,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 61,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "Ghost Writing",
+        "equipName": "Ghost Writing Book",
+        "keyword": "WRITINGBOOK",
+        "use": "Used to obtain Ghost Writing from a ghost",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 40,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 23,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 63,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "name": "Spirit Box",
+        "equipName": "Spirit Box",
+        "keyword": "SPIRITBOX",
+        "use": "Used to communicate with a ghost through questions",
+        "maxLimit": 2,
+        "storeInfo": {
+          "cost": 50,
+          "t1req": {
+            "level": 0,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 27,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 54,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      }
+    ]
   },
-  {
-    "name": "EMF Level 5",
-    "keyword": "EMF"
+  "optionalEquipment": {
+    "name": "Optional Equipment",
+    "equipment": [
+      {
+        "equipName": "Crucifix",
+        "maxLimit": 2,
+        "use": "Prevents ghosts from hunting in a certain radius",
+        "storeInfo": {
+          "cost": 30,
+          "t1req": {
+            "level": 8,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 37,
+            "upgradeCost": 3000,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 90,
+            "upgradeCost": 20000,
+            "consumable": true
+          }
+        }
+      },
+      {
+        "equipName": "Firelight",
+        "maxLimit": 4,
+        "use": "Used for optional objectives, and to provide light",
+        "storeInfo": {
+          "cost": 15,
+          "t1req": {
+            "level": 12,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 47,
+            "upgradeCost": 3000,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 79,
+            "upgradeCost": 10000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Head Gear",
+        "maxLimit": 4,
+        "use": "Can be equipped on a player's head. Will provide a video feed to the computer. Can be used to detect Ghost Orbs. To turn on head gear hold T(default)",
+        "storeInfo": {
+          "cost": 60,
+          "t1req": {
+            "level": 13,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 49,
+            "upgradeCost": 10000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 82,
+            "upgradeCost": 10000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Igniter",
+        "maxLimit": 4,
+        "use": "Used to light firelight and incense. Can also be used on campfires in Maple Lodge Campsite",
+        "storeInfo": {
+          "cost": 10,
+          "t1req": {
+            "level": 12,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 41,
+            "upgradeCost": 500,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 57,
+            "upgradeCost": 750,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Incense",
+        "maxLimit": 4,
+        "use": "Used to prevent a ghost from hunting for a short period of time. Can also be used to escape a hunt",
+        "storeInfo": {
+          "cost": 15,
+          "t1req": {
+            "level": 14,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 42,
+            "upgradeCost": 3500,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 85,
+            "upgradeCost": 15000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Motion Sensor",
+        "maxLimit": 4,
+        "use": "Provides light when a ghost or player passes it. A signal is also provided to the Van",
+        "storeInfo": {
+          "cost": 100,
+          "t1req": {
+            "level": 5,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 45,
+            "upgradeCost": 2500,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 74,
+            "upgradeCost": 8000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Parabolic Microphone",
+        "maxLimit": 2,
+        "use": "Used to listen to paranormal sounds in a large range",
+        "storeInfo": {
+          "cost": 50,
+          "t1req": {
+            "level": 7,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 31,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 72,
+            "upgradeCost": 5000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Photo Camera",
+        "maxLimit": 3,
+        "use": "Used to take photos of various ghost interactions for additional profit",
+        "storeInfo": {
+          "cost": 40,
+          "t1req": {
+            "level": 3,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 25,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 70,
+            "upgradeCost": 5000,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Salt",
+        "maxLimit": 3,
+        "use": "Places salt piles that ghosts can step on for photos. If a ghost doesn't step on salt, it's a Wraith",
+        "storeInfo": {
+          "cost": 15,
+          "t1req": {
+            "level": 9,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 43,
+            "upgradeCost": 2500,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 68,
+            "upgradeCost": 5000,
+            "consumable": true
+          }
+        }
+      },
+      {
+        "equipName": "Sanity Medication",
+        "maxLimit": 4,
+        "use": "Restores the consumer's sanity by a certain amount dependent on difficulty",
+        "storeInfo": {
+          "cost": 20,
+          "t1req": {
+            "level": 16,
+            "upgradeCost": 0,
+            "consumable": true
+          },
+          "t2req": {
+            "level": 39,
+            "upgradeCost": 2000,
+            "consumable": true
+          },
+          "t3req": {
+            "level": 77,
+            "upgradeCost": 5000,
+            "consumable": true
+          }
+        }
+      },
+      {
+        "equipName": "Sound Sensor",
+        "maxLimit": 4,
+        "use": "Detects near inaudible sounds in an area, and relays the data to the Van",
+        "storeInfo": {
+          "cost": 80,
+          "t1req": {
+            "level": 11,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 32,
+            "upgradeCost": 3000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 58,
+            "upgradeCost": 1500,
+            "consumable": false
+          }
+        }
+      },
+      {
+        "equipName": "Tripod",
+        "maxLimit": 4,
+        "use": "Used as a mount for Video Cameras. Lowers the chance for ghost to throw a Video Camera",
+        "storeInfo": {
+          "cost": 25,
+          "t1req": {
+            "level": 10,
+            "upgradeCost": 0,
+            "consumable": false
+          },
+          "t2req": {
+            "level": 34,
+            "upgradeCost": 5000,
+            "consumable": false
+          },
+          "t3req": {
+            "level": 62,
+            "upgradeCost": 3000,
+            "consumable": false
+          }
+        }
+      }
+    ]
   },
-  {
-    "name": "Ultraviolet",
-    "keyword": "UV"
-  },
-  {
-    "name": "Freezing",
-    "keyword": "FREEZING"
-  },
-  {
-    "name": "Ghost Orbs",
-    "keyword": "GHOSTORBS"
-  },
-  {
-    "name": "Ghost Writing",
-    "keyword": "WRITINGBOOK"
-  },
-  {
-    "name": "Spirit Box",
-    "keyword": "SPIRITBOX"
+  "vanEquipment": {
+    "name": "Van Equipment",
+    "equipment": [
+      {
+        "equipName": "Objective Board",
+        "use": "Displays all mandatory and optional objectives"
+      },
+      {
+        "equipName": "Site Map",
+        "use": "Provides a detailed map of the case location"
+      },
+      {
+        "equipName": "Sanity Monitor",
+        "use": "Provides a real time summary of all players sanity levels"
+      },
+      {
+        "equipName": "Site Activity Monitor",
+        "use": "Displays ghost activity any time a ghost performs an action. High levels indicate ghost events or hunts"
+      },
+      {
+        "equipName": "Computer",
+        "use": "Used to view onsite cameras, including active video cameras"
+      },
+      {
+        "equipName": "Sound Monitor",
+        "use": "Connects to Sound Sensors placed onsite. If sound is detected, it will be displayed on the monitor."
+      },
+      {
+        "equipName": "Clipboards",
+        "use": "Shows the current Daily and Weekly Tasks"
+      }
+    ]
   }
-]
+}

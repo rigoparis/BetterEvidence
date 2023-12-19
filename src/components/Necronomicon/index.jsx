@@ -8,7 +8,7 @@ import ItemsIcon from '../../assets/icons/itemsicon.svg';
 
 import GhostInfo from './GhostInfo';
 import CursedPossessionsInfo from './CursedPossessionsInfo';
-import ItemsInfo from './ItemsInfo';
+import GearInfo from './GearInfo';
 
 function Necronomicon() {
   const Tab = createBottomTabNavigator();
@@ -40,16 +40,16 @@ function Necronomicon() {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Items"
-        component={ItemsInfo}
+      <Tab.Screen
+        name="Equipment"
+        component={GearInfo}
         options={{
           tabBarLabelStyle: {fontSize: 14},
           tabBarIcon: ({color}) => (
             <ItemsIcon width={25} height={25} fill={color} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }

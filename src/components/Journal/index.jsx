@@ -191,7 +191,7 @@ const BetterEvidence = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.evidenceContainer}>
-          {evidenceInfo.map((evidence, key) => (
+          {evidenceInfo.starterEquipment.equipment.map((evidence, key) => (
             <TouchableOpacity
               disabled={!checkifEvidencePossible(evidence.keyword)}
               key={key}
