@@ -182,7 +182,7 @@
         {
           "name": "The Hermit",
           "chanceToDraw": "10%",
-          "effect": "Forces an interaction and doubles ghost activity for 20 seconds"
+          "effect": "Teleports and traps the ghost in its favorite room for a minute"
         },
         {
           "name": "The Sun",

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import * as Progress from 'react-native-progress';
+import {RFValue} from 'react-native-responsive-fontsize';
+import Tts from 'react-native-tts';
 
 const HuntTimer = () => {
   const [cooldownDuration, setCooldownDuration] = useState(25);
@@ -18,7 +20,14 @@ const HuntTimer = () => {
         const newTimeLeft = timeLeft - 1;
         setTimeLeft(newTimeLeft);
         setProgress((cooldownDuration - timeLeft + 1) / cooldownDuration);
-        if (newTimeLeft === 0) setTimerRunning(false);
+        if (newTimeLeft === 10)
+          Tts.speak('10 seconds until next hunt window, 5 for demon');
+        if (newTimeLeft === 5)
+          Tts.speak('Demon can now hunt. 5 seconds for the others');
+        if (newTimeLeft === 0) {
+          Tts.speak('All ghosts can now hunt');
+          setTimerRunning(false);
+        }
       }, 1000);
     } else {
       clearInterval(countdownInterval);
@@ -135,7 +144,8 @@ const HuntTimer = () => {
       case 2:
         return (
           <>
-            <Text style={[styles.label, {color: getDemonColor(), left: '70%'}]}>
+            <Text
+              style={[styles.label, {color: getDemonColor(), right: '20%'}]}>
               Demon
             </Text>
             <Text style={[styles.label, {color: getRestColor(), right: 0}]}>
@@ -185,7 +195,7 @@ const HuntTimer = () => {
             <View
               style={[
                 styles.mark,
-                {backgroundColor: getDemonColor(), left: '80%'},
+                {backgroundColor: getDemonColor(), right: '20%'},
               ]}></View>
           )}
         </View>
@@ -215,13 +225,13 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   name: {
-    fontSize: 25,
+    fontSize: RFValue(22),
     color: '#C6CACE',
     fontFamily: 'PermanentMarker-Regular',
   },
   huntStatus: {
     color: '#C6CACE',
-    fontSize: 20,
+    fontSize: RFValue(16),
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   timerContainer: {
@@ -232,13 +242,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   timer: {
-    fontSize: 30,
+    fontSize: RFValue(26),
     color: '#C6CACE',
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   touchToHunt: {
     color: '#C6CACE',
-    fontSize: 20,
+    fontSize: RFValue(16),
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   progressBarContainer: {
@@ -247,11 +257,11 @@ const styles = StyleSheet.create({
   labelContainer: {
     // flexDirection: 'row',
     // justifyContent: 'space-around',
-    marginBottom: 12,
+    marginBottom: 15,
     height: 15,
   },
   label: {
-    fontSize: 20,
+    fontSize: RFValue(16),
     color: '#C6CACE',
     position: 'absolute',
     top: 0,
@@ -263,7 +273,7 @@ const styles = StyleSheet.create({
   mark: {
     position: 'absolute',
     top: 0,
-    width: 4,
+    width: 2,
     height: '100%',
     backgroundColor: '#0A0C0F',
     alignItems: 'center',

@@ -1,14 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-
-import EdgefieldRoadMap from '../maps/EdgefieldRoadMap';
-// import GestureExample from '../GestureExample'
-import Pin from '../../assets/icons/pin.svg';
+import Loading from '../Loading';
 
 const SandBox = () => {
   return (
     <View style={{backgroundColor: '#000'}}>
-      <EdgefieldRoadMap />
+      <Loading />
     </View>
   );
 };

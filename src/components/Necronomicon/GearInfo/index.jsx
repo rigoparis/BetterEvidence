@@ -6,7 +6,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 import Accordion from 'react-native-collapsible/Accordion';
+import BannerAdContainer from '../../BannerAdContainer';
+import {BannerAdSize} from 'react-native-google-mobile-ads';
 
 import evidenceInfo from '../../../jsonInfo/evidenceInfo.json';
 import {map, values} from 'lodash';
@@ -117,6 +120,14 @@ const renderStarterContent = ({content}) => {
           )}
         </View>
       </View>
+      <View
+        style={{
+          marginVertical: 20,
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+        <BannerAdContainer bannerSize={BannerAdSize.MEDIUM_RECTANGLE} />
+      </View>
     </View>
   );
 };
@@ -143,6 +154,9 @@ function GearInfo() {
   };
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.accordionTitleContainer}>
+        <Text style={styles.accordionTitle}>Touch to expand</Text>
+      </View>
       <View>
         <Text style={styles.headerText}>Starting Equipment</Text>
         <Accordion
@@ -191,7 +205,17 @@ const styles = StyleSheet.create({
   tierContainer: {marginLeft: 20},
   tierInfoContainer: {marginLeft: 30},
   content: {marginHorizontal: 30, paddingVertical: 10},
-  contentText: {fontSize: 18, color: '#C6CACE', marginLeft: 10},
+  contentText: {fontSize: RFValue(16), color: '#C6CACE', marginLeft: 10},
+  accordionTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  accordionTitle: {
+    color: '#446D92',
+    fontSize: RFValue(14),
+    marginTop: 20,
+    fontFamily: 'PermanentMarker-Regular',
+  },
   header: {
     display: 'flex',
     justifyContent: 'center',
@@ -204,24 +228,24 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#446D92',
-    fontSize: 40,
+    fontSize: RFValue(28),
     marginVertical: 20,
     fontFamily: 'PermanentMarker-Regular',
     textAlign: 'center',
   },
   equipName: {
     color: '#C6CACE',
-    fontSize: 36,
+    fontSize: RFValue(26),
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   contentSubheader: {
     color: '#446D92',
-    fontSize: 26,
+    fontSize: RFValue(20),
   },
-  categoryHeader: {color: '#698aa7', fontSize: 22},
+  categoryHeader: {color: '#698aa7', fontSize: 18},
   categoryInformationSubheader: {
     color: '#8ea7bd',
-    fontSize: 18,
+    fontSize: RFValue(16),
     textDecorationLine: 'underline',
   },
 });

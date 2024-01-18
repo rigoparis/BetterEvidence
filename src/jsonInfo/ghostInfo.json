@@ -296,6 +296,7 @@
   {
     "name": "Hantu",
     "evidence": ["UV", "GHOSTORBS", "FREEZING"],
+    "guaranteedEvidence": "FREEZING",
     "strengths": [
       "Lower temperatures allow the Hantu to move at faster speeds"
     ],
@@ -323,6 +324,7 @@
   {
     "name": "Goryo",
     "evidence": ["EMF", "UV", "DOTS"],
+    "guaranteedEvidence": "DOTS",
     "strengths": [
       "Goryo will usually only show itself on camera if there are no people nearby"
     ],
@@ -428,6 +430,7 @@
   {
     "name": "Obake",
     "evidence": ["EMF", "UV", "GHOSTORBS"],
+    "guaranteedEvidence": "UV",
     "strengths": [
       "When interacting with the environment, Obake will rarely leave a trace"
     ],
@@ -449,6 +452,7 @@
   {
     "name": "The Mimic",
     "evidence": ["GHOSTORBS", "SPIRITBOX", "FREEZING", "UV"],
+    "guaranteedEvidence": "GHOSTORBS",
     "strengths": ["Mimics ghost abilites"],
     "weaknesses": ["Will always have Ghost Orbs as evidence"],
     "noEvidenceTells": [
@@ -472,6 +476,7 @@
   {
     "name": "Moroi",
     "evidence": ["SPIRITBOX", "WRITINGBOOK", "FREEZING"],
+    "guaranteedEvidence": "SPIRITBOX",
     "strengths": ["The weaker their victims, the stronger the Moroi Becomes"],
     "weaknesses": [
       "Moroi suffer from hyperosmia, weakening them for longer periods"
@@ -496,6 +501,7 @@
   {
     "name": "Deogen",
     "evidence": ["SPIRITBOX", "WRITINGBOOK", "DOTS"],
+    "guaranteedEvidence": "SPIRITBOX",
     "strengths": [
       "Deogen constantly sense the living. You can run but you can't hide"
     ],

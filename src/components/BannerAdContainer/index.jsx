@@ -1,18 +1,13 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React from 'react';
 import appjson from '../../../app.json';
 
-import {
-  TestIds,
-  BannerAd,
-  BannerAdSize,
-  RevenuePrecisions,
-} from 'react-native-google-mobile-ads';
+import {TestIds, BannerAd} from 'react-native-google-mobile-ads';
+import {View} from 'react-native';
 
-function BannerAdContainer() {
+function BannerAdContainer({bannerSize}) {
   const adUnitId = __DEV__
     ? TestIds.BANNER
-    : appjson['react-native-google-mobile-ads'].admob_lower_banner_id;
+    : appjson['react-native-google-mobile-ads'].admob_banner_id;
 
   const postJSON = async (data) => {
     try {
@@ -33,10 +28,10 @@ function BannerAdContainer() {
   };
 
   return (
-    <View>
+    <View style={{display: 'flex', justifyContent: 'center'}}>
       <BannerAd
         unitId={adUnitId}
-        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        size={bannerSize}
         onPaid={(event) => {
           // console.log(
           //   `Paid: ${event.value} ${event.currency} (precision ${

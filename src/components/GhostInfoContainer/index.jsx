@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import evidenceInfo from '../../jsonInfo/evidenceInfo.json';
 import {find} from 'lodash';
@@ -95,12 +96,14 @@ export default GhostInfoContainer;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: 'beige',
-    width: '90%',
+    width: '100%',
     padding: 20,
     color: '#251607',
     borderColor: '#624a2e',
     borderWidth: 3,
     borderRadius: 5,
+    marginRight: 'auto',
+    marginLeft: 'auto',
   },
   header: {
     flex: 0,
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
   },
   evidenceLineText: {
     color: '#251607',
-    fontSize: 20,
+    fontSize: RFValue(14),
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   line: {
@@ -132,19 +135,19 @@ const styles = StyleSheet.create({
     color: '#251607',
   },
   ghostName: {
-    fontSize: 28,
+    fontSize: RFValue(28),
     fontFamily: 'PermanentMarker-Regular',
     color: '#251607',
   },
   atributeName: {
     paddingLeft: 10,
-    fontSize: 20,
+    fontSize: RFValue(18),
     fontFamily: 'PermanentMarker-Regular',
   },
   atributeInfo: {
     paddingLeft: 20,
     paddingVertical: 5,
-    fontSize: 20,
+    fontSize: RFValue(16),
     fontFamily: 'ShadowsIntoLight-Regular',
   },
   tinyLogo: {
