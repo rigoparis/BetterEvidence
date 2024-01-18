@@ -1,12 +1,37 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import * as Progress from 'react-native-progress';
+import {RFValue} from 'react-native-responsive-fontsize';
+import Tts from 'react-native-tts';
 
 const SmudgeTimer = () => {
   const [duration, setDuration] = useState(180);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progress, setProgress] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(
+    Dimensions.get('window').width,
+  );
+
+  const updateScreenWidth = () => {
+    setScreenWidth(Dimensions.get('window').width);
+  };
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', updateScreenWidth);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      if (Dimensions.removeEventListener)
+        Dimensions.removeEventListener('change', updateScreenWidth);
+    };
+  }, [Dimensions]);
 
   useEffect(() => {
     let countdownInterval;
@@ -16,7 +41,24 @@ const SmudgeTimer = () => {
         const newTimeLeft = timeLeft - 1;
         setTimeLeft(newTimeLeft);
         setProgress((duration - timeLeft + 1) / duration);
-        if (newTimeLeft === 0) stop();
+        if (newTimeLeft === 130)
+          Tts.speak('10 seconds until smudge fades for demons.');
+        if (newTimeLeft === 120)
+          Tts.speak('Smudge fades for demons. 30 seconds until next update.');
+        if (newTimeLeft === 100)
+          Tts.speak(
+            '10 seconds until smudge fades for all ghosts, except Spirit.',
+          );
+        if (newTimeLeft === 90)
+          Tts.speak(
+            'Smudge fades for all ghosts, except Spirit. 90 seconds until next update.',
+          );
+        if (newTimeLeft === 10)
+          Tts.speak('10 seconds until smudge fades for Spirit.');
+        if (newTimeLeft === 0) {
+          Tts.speak('Smudge fades for Spirit.');
+          stop();
+        }
       }, 1000);
     } else {
       clearInterval(countdownInterval);
@@ -85,10 +127,10 @@ const SmudgeTimer = () => {
       </View>
       <View style={styles.progressBarContainer}>
         <View style={styles.labelContainer}>
-          <Text style={[styles.label, {color: getDemonColor(), left: '23%'}]}>
+          <Text style={[styles.label, {color: getDemonColor(), right: '66%'}]}>
             Demon
           </Text>
-          <Text style={[styles.label, {color: getRestColor(), left: '40.5%'}]}>
+          <Text style={[styles.label, {color: getRestColor(), right: '50%'}]}>
             Others
           </Text>
           <Text style={[styles.label, {color: getSpiritColor(), right: 0}]}>
@@ -108,12 +150,12 @@ const SmudgeTimer = () => {
           <View
             style={[
               styles.mark,
-              {backgroundColor: getDemonColor(), left: '33%'},
+              {backgroundColor: getDemonColor(), right: '66%'},
             ]}></View>
           <View
             style={[
               styles.mark,
-              {backgroundColor: getRestColor(), left: '50%'},
+              {backgroundColor: getRestColor(), right: '50%'},
             ]}></View>
         </View>
       </View>
@@ -142,7 +184,7 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   name: {
-    fontSize: 25,
+    fontSize: RFValue(22),
     color: '#C6CACE',
     fontFamily: 'PermanentMarker-Regular',
   },
@@ -154,7 +196,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   timer: {
-    fontSize: 30,
+    fontSize: RFValue(26),
     color: '#C6CACE',
     fontFamily: 'ShadowsIntoLight-Regular',
   },
@@ -162,11 +204,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   labelContainer: {
-    marginBottom: 12,
+    marginBottom: 15,
     height: 15,
   },
   label: {
-    fontSize: 20,
+    fontSize: RFValue(16),
     fontFamily: 'ShadowsIntoLight-Regular',
     color: '#C6CACE',
     position: 'absolute',
@@ -178,7 +220,7 @@ const styles = StyleSheet.create({
   mark: {
     position: 'absolute',
     top: 0,
-    width: 4,
+    width: 2,
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',

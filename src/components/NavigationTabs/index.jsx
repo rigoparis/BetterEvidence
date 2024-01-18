@@ -1,13 +1,14 @@
 import {StyleSheet, Image} from 'react-native';
 import React from 'react';
-import Homescreen from '../Journal';
+import Journal from '../Journal';
 import TimersScreen from '../TimersScreen';
 import MapsScreen from '../MapsScreen';
 import SandBox from '../SandBox';
 import Necronomicon from '../Necronomicon';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import Journal from '../../assets/icons/journal.svg';
+import JournalIcon from '../../assets/icons/journal.svg';
 import StopWatch from '../../assets/icons/stopwatch.svg';
 import Map from '../../assets/icons/map.svg';
 import NecronomiconIcon from '../../assets/icons/necronomicon.svg';
@@ -17,18 +18,22 @@ const NavigationTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        lazy: false,
         headerShown: false,
-        tabBarStyle: {backgroundColor: '#0A0C0F', height: '10%'},
+        tabBarStyle: {
+          backgroundColor: '#0A0C0F',
+          paddingVertical: 5,
+        },
         tabBarActiveTintColor: '#446D92',
         tabBarInactiveTintColor: '#C6CACE',
       }}>
       <Tab.Screen
         name="Journal"
-        component={Homescreen}
+        component={Journal}
         options={{
-          tabBarLabelStyle: {fontSize: 16},
+          tabBarLabelStyle: {fontSize: RFValue(12)},
           tabBarIcon: ({color}) => (
-            <Journal width={38} height={38} fill={color} />
+            <JournalIcon width={'100%'} height={'100%'} fill={color} />
           ),
         }}
       />
@@ -36,9 +41,9 @@ const NavigationTabs = () => {
         name="Timers"
         component={TimersScreen}
         options={{
-          tabBarLabelStyle: {fontSize: 16},
+          tabBarLabelStyle: {fontSize: RFValue(12)},
           tabBarIcon: ({color}) => (
-            <StopWatch width={38} height={38} fill={color} />
+            <StopWatch width={'100%'} height={'100%'} fill={color} />
           ),
         }}
       />
@@ -46,20 +51,22 @@ const NavigationTabs = () => {
         name="Maps"
         component={MapsScreen}
         options={{
-          tabBarLabelStyle: {fontSize: 16},
-          tabBarIcon: ({color}) => <Map width={38} height={38} fill={color} />,
-        }}
-      />
-      <Tab.Screen
-        name="Necronomicon"
-        component={Necronomicon}
-        options={{
-          tabBarLabelStyle: {fontSize: 16},
+          tabBarLabelStyle: {fontSize: RFValue(12)},
           tabBarIcon: ({color}) => (
-            <NecronomiconIcon width={38} height={38} fill={color} />
+            <Map width={'100%'} height={'100%'} fill={color} />
           ),
         }}
       />
+      {/* <Tab.Screen
+        name="Necronomicon"
+        component={Necronomicon}
+        options={{
+          tabBarLabelStyle: {fontSize: RFValue(12)},
+          tabBarIcon: ({color}) => (
+            <NecronomiconIcon width={'100%'} height={'100%'} fill={color} />
+          ),
+        }}
+      /> */}
       {/* <Tab.Screen name="SandBox" component={SandBox} /> */}
     </Tab.Navigator>
   );

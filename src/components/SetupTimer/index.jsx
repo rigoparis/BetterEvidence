@@ -2,6 +2,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import * as Progress from 'react-native-progress';
+import {RFValue} from 'react-native-responsive-fontsize';
+import Tts from 'react-native-tts';
 
 const durations = [
   {label: '30 seconds', value: 30},
@@ -27,7 +29,13 @@ const SetupTimer = () => {
         const newTimeLeft = timeLeft - 1;
         setTimeLeft(newTimeLeft);
         setProgress((duration - timeLeft + 1) / duration);
-        if (newTimeLeft === 0) stop();
+        if (newTimeLeft === 10) Tts.speak('10 seconds until setup is done');
+        if (newTimeLeft <= 5 && newTimeLeft >= 1)
+          Tts.speak(newTimeLeft.toString());
+        if (newTimeLeft === 0) {
+          Tts.speak('Setup is done. The ghost can attack');
+          stop();
+        }
       }, 1000);
     } else {
       clearInterval(countdownInterval);
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   name: {
-    fontSize: 25,
+    fontSize: RFValue(22),
     color: '#C6CACE',
     fontFamily: 'PermanentMarker-Regular',
   },
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
     color: '#C6CACE',
   },
   timer: {
-    fontSize: 30,
+    fontSize: RFValue(26),
     color: '#C6CACE',
     fontFamily: 'ShadowsIntoLight-Regular',
   },
@@ -173,7 +181,7 @@ const styles = StyleSheet.create({
     height: 15,
   },
   label: {
-    fontSize: 20,
+    fontSize: RFValue(16),
     fontFamily: 'ShadowsIntoLight-Regular',
     color: '#C6CACE',
     position: 'absolute',

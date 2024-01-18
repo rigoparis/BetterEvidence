@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 import EvidenceContainer from '../EvidenceContainer';
 import evidenceInfo from '../../jsonInfo/evidenceInfo.json';
 import ghostInfo from '../../jsonInfo/ghostInfo.json';
@@ -18,7 +13,8 @@ import {
   find,
   chain,
   map,
-  remove,
+  concat,
+  reject,
 } from 'lodash';
 import GhostInfoContainer from '../GhostInfoContainer';
 import {
@@ -30,48 +26,174 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import Spinner from '../../assets/icons/spinner11.svg';
 
-const BetterEvidence = () => {
+const Journal = () => {
   const [selectedEvidence, setSelectedEvidence] = useState([]);
   const [rejectedEvidence, setRejectedEvidence] = useState([]);
   const [possibleGhosts, setPossibleGhosts] = useState([]);
+  const [possibleEvidence, setPossibleEvidence] = useState(
+    map(evidenceInfo.starterEquipment.equipment, 'keyword'),
+  );
   const [evidenceLimit, setEvidenceLimit] = useState(3);
+  const [rejectedGhosts, setRejectedGhosts] = useState([]);
+  const [isNotificationOnCD, setIsNotificationOnCD] = useState(false);
 
   useEffect(() => {
-    let result = filter(ghostInfo, (obj) => {
-      let evidence = obj.evidence;
-      return (
-        every(selectedEvidence, (str) => includes(evidence, str)) &&
-        !some(rejectedEvidence, (str) => includes(evidence, str))
+    let filteredGhosts = ghostInfo;
+    if (evidenceLimit === 0) {
+      if (selectedEvidence.length > 0) {
+        filteredGhosts = [find(filteredGhosts, {name: 'The Mimic'})];
+      } else if (rejectedEvidence.length > 0) {
+        filteredGhosts = reject(filteredGhosts, {name: 'The Mimic'});
+      } else {
+        filteredGhosts = ghostInfo;
+      }
+    } else if (evidenceLimit === 1) {
+      let newEvidence;
+      if (selectedEvidence.length > evidenceLimit) {
+        filteredGhosts = [find(ghostInfo, {name: 'The Mimic'})];
+        newEvidence = concat(selectedEvidence, rejectedEvidence);
+      }
+      if (selectedEvidence.length === evidenceLimit) {
+        const mimic = find(ghostInfo, {name: 'The Mimic'});
+        if (
+          selectedEvidence.length === 1 &&
+          includes(selectedEvidence, 'GHOSTORBS')
+        ) {
+          newEvidence = mimic.evidence;
+        } else if (
+          selectedEvidence.length === 1 &&
+          includes(mimic.evidence, selectedEvidence[0])
+        ) {
+          newEvidence = [
+            'GHOSTORBS',
+            ...concat(selectedEvidence, rejectedEvidence),
+          ];
+        } else {
+          newEvidence = concat(selectedEvidence, rejectedEvidence);
+        }
+        filteredGhosts = filter(filteredGhosts, (i) => {
+          if (i.guaranteedEvidence !== undefined) {
+            return (
+              every(selectedEvidence, (str) => includes(i.evidence, str)) &&
+              includes(newEvidence, i.guaranteedEvidence) &&
+              !includes(rejectedEvidence, i.guaranteedEvidence)
+            );
+          }
+          return every(selectedEvidence, (str) => includes(i.evidence, str));
+        });
+      }
+      if (!newEvidence)
+        newEvidence = chain(ghostInfo).map('evidence').flatten().uniq().value();
+      setPossibleEvidence(newEvidence);
+    } else if (evidenceLimit === 2) {
+      let newEvidence;
+      let hypotheticalPossibleEvidence = chain(ghostInfo)
+        .filter((i) =>
+          some(concat(selectedEvidence, rejectedEvidence), (str) =>
+            includes(i.evidence, str),
+          ),
+        )
+        .map((i) => i.evidence)
+        .flatten()
+        .uniq()
+        .value();
+      if (selectedEvidence.length > evidenceLimit) {
+        filteredGhosts = [find(ghostInfo, {name: 'The Mimic'})];
+        newEvidence = concat(selectedEvidence, rejectedEvidence);
+      }
+      if (selectedEvidence.length === evidenceLimit) {
+        filteredGhosts = filter(filteredGhosts, (i) => {
+          if (i.guaranteedEvidence !== undefined) {
+            return (
+              every(selectedEvidence, (str) => includes(i.evidence, str)) &&
+              !includes(rejectedEvidence, i.guaranteedEvidence) &&
+              includes(hypotheticalPossibleEvidence, i.guaranteedEvidence)
+            );
+          }
+          return every(selectedEvidence, (str) => includes(i.evidence, str));
+        });
+        const mimic = find(filteredGhosts, {name: 'The Mimic'});
+        if (mimic !== undefined && !includes(selectedEvidence, 'GHOSTORBS')) {
+          newEvidence = [
+            'GHOSTORBS',
+            ...concat(selectedEvidence, rejectedEvidence),
+          ];
+        } else if (
+          mimic !== undefined &&
+          includes(selectedEvidence, 'GHOSTORBS')
+        ) {
+          newEvidence = mimic.evidence;
+        } else {
+          newEvidence = concat(selectedEvidence, rejectedEvidence);
+        }
+      }
+      if (selectedEvidence.length === 1) {
+        filteredGhosts = filter(filteredGhosts, (i) => {
+          if (i.guaranteedEvidence !== undefined) {
+            return (
+              every(selectedEvidence, (str) => includes(i.evidence, str)) &&
+              !includes(rejectedEvidence, i.guaranteedEvidence) &&
+              includes(hypotheticalPossibleEvidence, i.guaranteedEvidence)
+            );
+          }
+          return every(selectedEvidence, (str) => includes(i.evidence, str));
+        });
+      }
+      if (!newEvidence)
+        newEvidence = chain(filteredGhosts)
+          .map('evidence')
+          .concat(rejectedEvidence)
+          .flatten()
+          .uniq()
+          .value();
+      setPossibleEvidence(newEvidence);
+    } else if (evidenceLimit === 3) {
+      filteredGhosts = filter(filteredGhosts, (i) => {
+        return (
+          every(selectedEvidence, (str) => includes(i.evidence, str)) &&
+          !some(rejectedEvidence, (str) => includes(i.evidence, str))
+        );
+      });
+      setPossibleEvidence(
+        chain(filteredGhosts)
+          .map('evidence')
+          .concat(rejectedEvidence)
+          .flatten()
+          .uniq()
+          .value(),
       );
-    });
-    let selectedLength = selectedEvidence.length;
-    let matchingOrMore = filter(
-      result,
-      (obj) => obj.evidence.length >= selectedLength,
-    );
-    if (evidenceLimit === 0 && includes(selectedEvidence, 'GHOSTORBS')) {
-      matchingOrMore = filter(matchingOrMore, {name: 'The Mimic'});
-    } else if (evidenceLimit === 0 && includes(rejectedEvidence, 'GHOSTORBS')) {
-      matchingOrMore = filter(ghostInfo, (g) => g.name !== 'The Mimic');
     }
-    return setPossibleGhosts(matchingOrMore);
-  }, [selectedEvidence, rejectedEvidence]);
+    setPossibleGhosts(filteredGhosts);
+  }, [selectedEvidence, rejectedEvidence, evidenceLimit]);
 
   useEffect(() => {
     if (possibleGhosts.length === 1) {
-      showNotification();
+      if (!isNotificationOnCD) {
+        showNotification();
+        setIsNotificationOnCD(true);
+        setTimeout(() => {
+          setIsNotificationOnCD(false);
+        }, 1000 * 60 * 5);
+      }
+      setRejectedGhosts([]);
     }
   }, [possibleGhosts]);
 
   const resetInvestigation = () => {
+    setPossibleEvidence(
+      evidenceLimit === 0
+        ? ['GHOSTORBS']
+        : map(evidenceInfo.starterEquipment.equipment, 'keyword'),
+    );
     setSelectedEvidence([]);
     setRejectedEvidence([]);
-    setPossibleGhosts([]);
+    setPossibleGhosts(evidenceLimit === 0 ? ghostInfo : []);
+    setRejectedGhosts([]);
     Notifier.showNotification({
       title: 'Journal Reset',
       description:
         'Good luck on your next investigation, be careful out there.',
-      duration: 5000,
+      duration: 3000,
       showAnimationDuration: 800,
       queueMode: 'next',
       showEasing: Easing.bounce,
@@ -97,28 +219,11 @@ const BetterEvidence = () => {
       setRejectedEvidence(newRejectedEvidence);
       setSelectedEvidence(newSelectedEvidence);
     }
-    if (
-      pEviName === 'GHOSTORB' &&
-      !includes(selectedEvidence, 'GHOSTORB') &&
-      !includes(rejectedEvidence, 'GHOSTORB') &&
-      find(possibleGhosts, {name: 'The Mimic'})
-    ) {
-      Notifier.showNotification({
-        title: 'POTENTIAL MIMIC',
-        description: 'You selected Ghost Orbs, please be careful of a Mimic',
-        duration: 5000,
-        showAnimationDuration: 800,
-        queueMode: 'next',
-        showEasing: Easing.bounce,
-        Component: NotifierComponents.Alert,
-        componentProps: {
-          alertType: 'warn',
-        },
-      });
-    }
   };
 
   const getGhostNameStyles = (ghost) => {
+    if (!!find(rejectedGhosts, {name: ghost.name}))
+      return [styles.ghostName, styles.ghostNameRejectedManual];
     if (selectedEvidence.length > 0 && possibleGhosts.length === 0)
       return [styles.ghostName, styles.ghostNameRejected];
     if (possibleGhosts.length > 0) {
@@ -136,100 +241,137 @@ const BetterEvidence = () => {
     Notifier.showNotification({
       title: 'Mark your ghost',
       description: "If you're sure, remember to press 'J' and mark the ghost",
-      duration: 5000,
-      queueMode: 'standby',
+      duration: 3000,
+      queueMode: 'next',
       showAnimationDuration: 800,
       showEasing: Easing.bounce,
     });
   };
 
-  const checkifEvidencePossible = (evidenceKeyword) => {
-    if (evidenceLimit === 0 && evidenceKeyword === 'GHOSTORBS') {
-      return true;
-    } else if (evidenceLimit === 0) {
-      return false;
+  const handleRejectGhosts = (ghost) => () => {
+    if (includes(rejectedGhosts, ghost)) {
+      setRejectedGhosts(without(rejectedGhosts, ghost));
+      setPossibleGhosts([ghost, ...possibleGhosts]);
+    } else {
+      setRejectedGhosts([ghost, ...rejectedGhosts]);
+      setPossibleGhosts(reject(possibleGhosts, ghost));
     }
-    if (includes(rejectedEvidence, evidenceKeyword)) return true;
-    if (
-      !includes(selectedEvidence, evidenceKeyword) &&
-      selectedEvidence.length === evidenceLimit
-    )
-      return false;
-    return chain(possibleGhosts)
-      .map((i) => i.evidence)
-      .flatten()
-      .uniq()
-      .includes(evidenceKeyword)
-      .value();
   };
 
   return (
     <NotifierWrapper>
-      <ScrollView style={styles.background}>
-        <View style={styles.pickerContainer}>
-          <Text style={styles.pickerHeader}>Evidence amount:</Text>
-          <Picker
-            selectedValue={evidenceLimit}
-            style={styles.picker}
-            dropdownIconColor="#FFF"
-            prompt="Select amount of evidence"
-            onValueChange={(itemValue, itemIndex) =>
-              setEvidenceLimit(itemValue)
-            }>
-            <Picker.Item label={3} value={3} />
-            <Picker.Item label={2} value={2} />
-            <Picker.Item label={1} value={1} />
-            <Picker.Item label={0} value={0} />
-          </Picker>
-        </View>
-        <View>
-          <Text style={styles.subheader}>Select evidence</Text>
-          <TouchableOpacity
-            style={styles.restartIcon}
-            onPress={() => resetInvestigation()}>
-            <Spinner width={20} height={20} fill="#C6CACE" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.evidenceContainer}>
-          {evidenceInfo.starterEquipment.equipment.map((evidence, key) => (
-            <TouchableOpacity
-              disabled={!checkifEvidencePossible(evidence.keyword)}
-              key={key}
-              onPress={() => handleEvidencePress(evidence.keyword)}>
-              <EvidenceContainer
-                evidence={evidence}
-                selected={!!includes(selectedEvidence, evidence.keyword)}
-                rejected={!!includes(rejectedEvidence, evidence.keyword)}
-                disabled={!checkifEvidencePossible(evidence.keyword)}
-              />
-            </TouchableOpacity>
-          ))}
-        </View>
-        <Text style={styles.subheader}>Ghosts</Text>
-        <View style={styles.ghostContainer}>
-          {ghostInfo.map((ghost, key) => {
-            return (
-              <Text style={getGhostNameStyles(ghost)} key={key}>
-                {ghost.name}
-              </Text>
-            );
-          })}
-        </View>
-        <Text style={styles.subheader}>Additional Info</Text>
-        <View style={styles.infoContainer}>
-          {evidenceLimit !== 0 && selectedEvidence.length === 0 && (
-            <Text style={styles.text}>Please select at least 1 evidence</Text>
-          )}
-          {(evidenceLimit === 0 || selectedEvidence.length >= 1) &&
-            possibleGhosts.map((ghost, key) => (
-              <GhostInfoContainer ghost={ghost} key={key} />
-            ))}
-        </View>
-      </ScrollView>
+      <FlatList
+        ListHeaderComponent={
+          <View style={styles.background}>
+            <View style={styles.pickerContainer}>
+              <Text style={styles.pickerHeader}>Evidence amount:</Text>
+              <Picker
+                selectedValue={evidenceLimit}
+                style={styles.picker}
+                dropdownIconColor="#FFF"
+                prompt="Select amount of evidence"
+                onValueChange={(itemValue, itemIndex) => {
+                  setEvidenceLimit(itemValue);
+                  setPossibleEvidence(
+                    itemValue === 0
+                      ? ['GHOSTORBS']
+                      : map(evidenceInfo.starterEquipment.equipment, 'keyword'),
+                  );
+                  setSelectedEvidence([]);
+                  setRejectedEvidence([]);
+                  setPossibleGhosts(itemValue === 0 ? ghostInfo : []);
+                  setRejectedGhosts([]);
+                }}>
+                <Picker.Item label={3} value={3} />
+                <Picker.Item label={2} value={2} />
+                <Picker.Item label={1} value={1} />
+                <Picker.Item label={0} value={0} />
+              </Picker>
+            </View>
+            <View>
+              <Text style={styles.subheader}>Select evidence</Text>
+              <TouchableOpacity
+                style={styles.restartIcon}
+                onPress={() => resetInvestigation()}>
+                <Spinner width={20} height={20} fill="#C6CACE" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.evidenceContainer}>
+              {evidenceInfo.starterEquipment.equipment.map((evidence, key) => (
+                <TouchableOpacity
+                  disabled={!includes(possibleEvidence, evidence.keyword)}
+                  key={key}
+                  onPress={() => handleEvidencePress(evidence.keyword)}>
+                  <EvidenceContainer
+                    evidence={evidence}
+                    selected={includes(selectedEvidence, evidence.keyword)}
+                    rejected={includes(rejectedEvidence, evidence.keyword)}
+                    disabled={!includes(possibleEvidence, evidence.keyword)}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={styles.subheader}>Ghosts</Text>
+            <Text
+              style={{
+                fontSize: RFValue(12),
+                textAlign: 'center',
+                paddingTop: 5,
+                paddingBottom: 10,
+              }}>
+              You can tap ghost names to eliminate them
+            </Text>
+            <View style={styles.ghostContainer}>
+              {ghostInfo.map((ghost, key) => {
+                return (
+                  <TouchableOpacity
+                    key={key}
+                    disabled={
+                      !includes(
+                        concat(possibleGhosts, rejectedGhosts),
+                        ghost,
+                      ) || possibleGhosts.length === 1
+                    }
+                    onPress={handleRejectGhosts(ghost)}>
+                    <Text style={getGhostNameStyles(ghost)}>{ghost.name}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            <Text style={styles.subheader}>Additional Info</Text>
+            {possibleGhosts.length === 0 && (
+              <View>
+                <Text
+                  style={{
+                    ...styles.text,
+                    textAlign: 'center',
+                    paddingVertical: 5,
+                  }}>
+                  Please select at least 1 evidence
+                </Text>
+              </View>
+            )}
+          </View>
+        }
+        data={possibleGhosts}
+        initialNumToRender={1}
+        style={{flex: 1}}
+        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+        renderItem={({item}) => (
+          <View
+            style={{
+              paddingBottom: 10,
+              paddingHorizontal: 20,
+              backgroundColor: '#2e2f31',
+            }}>
+            <GhostInfoContainer ghost={item} />
+          </View>
+        )}
+      />
     </NotifierWrapper>
   );
 };
-export default BetterEvidence;
+export default Journal;
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -280,7 +422,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   subheader: {
-    fontSize: 28,
+    fontSize: RFValue(26),
     color: '#738B9B',
     textDecorationLine: 'underline',
     textAlign: 'center',
@@ -299,7 +441,7 @@ const styles = StyleSheet.create({
   },
   ghostName: {
     width: 100,
-    fontSize: 24,
+    fontSize: RFValue(20),
     color: '#C6CACE',
     textAlign: 'center',
     fontFamily: 'ShadowsIntoLight-Regular',
@@ -307,6 +449,10 @@ const styles = StyleSheet.create({
   ghostNameRejected: {
     textDecorationLine: 'line-through',
     color: '#0A0C0F',
+  },
+  ghostNameRejectedManual: {
+    textDecorationLine: 'line-through',
+    color: '#ff3333',
   },
   ghostNamePossible: {
     color: '#446D92',
@@ -316,6 +462,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#C6CACE',
     fontFamily: 'ShadowsIntoLight-Regular',
+    fontSize: RFValue(14),
   },
   pickerContainer: {
     backgroundColor: '#0A0C0F',
@@ -327,7 +474,7 @@ const styles = StyleSheet.create({
   },
   pickerHeader: {
     color: '#FFF',
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   picker: {
     color: '#FFF',

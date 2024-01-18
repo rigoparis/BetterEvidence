@@ -90,10 +90,7 @@ const MapsScreen = () => {
 
   const handlePress = useCallback(async () => {
     const url = 'https://phasmo.karotte.org/';
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      await Linking.openURL(url);
-    }
+    Linking.openURL(url);
   }, []);
 
   return (

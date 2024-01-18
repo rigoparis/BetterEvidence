@@ -6,6 +6,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import React, {useState} from 'react';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import Icon from '../../assets/evidenceImages/Icon';
 
@@ -23,6 +24,7 @@ const EvidenceContainer = ({evidence, selected, rejected, disabled}) => {
           <Icon keyword={evidence.keyword} size={60} />
         </View>
         <Text
+          adjustsFontSizeToFit
           style={[
             styles.evidenceName,
             !disabled && selected ? styles.selectedText : '',
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   },
   evidenceName: {
     color: 'white',
-    fontSize: 18,
+    fontSize: RFValue(14),
     textAlign: 'center',
     backgroundColor: '#000000c0',
     width: '100%',
